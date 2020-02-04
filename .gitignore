@@ -7,10 +7,14 @@
 /public/bundles/
 /var/
 /vendor/
-docker/
+
+!docker/
+docker/*
 !docker/php/
-!docker/mysql/script
-!docker/mysql/Dockerfile
+
+!docker/mysql/*
+#!docker/mysql/script/
+#!docker/mysql/Dockerfile
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
