@@ -12,9 +12,9 @@
 docker/*
 !docker/php/
 
-!docker/mysql/*
-#!docker/mysql/script/
-#!docker/mysql/Dockerfile
+!docker/mysql/script/
+!docker/mysql/Dockerfile
+
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
