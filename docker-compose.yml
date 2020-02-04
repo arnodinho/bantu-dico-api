@@ -18,9 +18,8 @@ services:
             - ${MYSQL_CONTAINER_VOLUME}:/var/lib/mysql #connects the mysql-data volume to the location /var/lib/mysql inside the docker container. This means that
             # the information in the database will be persisted even if we shut down or remove our docker container
 
-       # si le serveur MySQL s'arrête, celui-ci  redémarrera automatiquement grâce à l'argument restart: always.
-       restart: always
-
+        # si le serveur MySQL s'arrête, celui-ci  redémarrera automatiquement grâce à l'argument restart: always.
+        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
