@@ -1,22 +1,26 @@
-version: '3'
+version: '3.7'
 
 services:
     #  Chaque conteneur commence avec un nom qui lui est propre ; dans notre cas, notre premier conteneur se nommera db
     db:
-        image: mysql
+        image: mysql:latest
         ports:
             - 3306:3306
+        container_name: ${MYSQL_CONTAINER_NAME} #names our container so we can reference it from outside the docker network
         # les conteneurs Docker ne sont pas faits pour faire fonctionner des services stateful, et une base de données
         # est par définition un service stateful. Volumes permet de stocker l'ensemble du contenu du dossier/var/lib/mysql
         # dans un disque persistant. Et donc, de pouvoir garder les données en local sur notre host.
 
-        # db_data est un volume créé par Docker directement, qui permet d'écrire les données sur le disque hôte sans spécifier
+        # mysql-data est un volume créé par Docker directement, qui permet d'écrire les données sur le disque hôte sans spécifier
         # l'emplacement exact. Vous auriez pu aussi faire un /data/mysql:/var/lib/mysql qui serait aussi fonctionnel.
         volumes:
-            - db_data:/var/lib/mysql
+            - ${MYSQL_CONTAINER_INIT}:/docker-entrypoint-initdb.d
+            - ${MYSQL_CONTAINER_VOLUME}:/var/lib/mysql #connects the mysql-data volume to the location /var/lib/mysql inside the docker container. This means that
+            # the information in the database will be persisted even if we shut down or remove our docker container
 
-        # si le serveur MySQL s'arrête, celui-ci  redémarrera automatiquement grâce à l'argument restart: always.
-        restart: always
+       # si le serveur MySQL s'arrête, celui-ci  redémarrera automatiquement grâce à l'argument restart: always.
+       restart: always
+
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -28,6 +32,7 @@ services:
     #phpmyadmin est attaché au container « db », et il sera accessible sur le port 8181
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
+        container_name: ${PHPMYADMIN_CONTAINER_NAME}
         links:
             - db
         ports:
@@ -35,15 +40,16 @@ services:
         # depends_on, nous permet de créer une dépendance entre deux conteneurs. Ainsi, Docker démarrera le service db avant de démarrer le service Wordpress
         depends_on:
             - db
+        env_file:
+            - ".env"
     php:
         build: docker/php # Get our Dockerfile configuration
+        container_name: ${UBUNTU_CONTAINER_NAME}
         links:
             - db:mysqldb
         volumes:
-            - ${PROJECT_PATH}:/var/www/html/sango-dico
+            - ${PROJECT_PATH}:/var/www/html/bantu-dico
         ports:
             - 80:80
         env_file:
             - ".env"
-volumes:
-    db_data: {}
