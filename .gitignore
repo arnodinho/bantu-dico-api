@@ -8,12 +8,8 @@
 /var/
 /vendor/
 
-!docker/
-docker/*
-!docker/php/
-
-!docker/mysql/script/
-!docker/mysql/Dockerfile
+##docker
+/docker/mysql/mysql-data/
 
 ###< symfony/framework-bundle ###
 
