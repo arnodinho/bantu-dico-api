@@ -8,6 +8,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+
 /**
  * Class BaseLanguage.
  */
@@ -19,143 +21,246 @@ class BaseLanguage
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="word", type="string", length=255)
      */
-    private $word;
+    protected $word;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="Description", type="string", length=255, nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="Exemple", type="string", length=255, nullable=true)
      */
-    private $exemple;
+    protected $exemple;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
-    private $url;
+    protected $url;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(name="Type", type="string", length=30)
      */
-    private $type;
+    protected $type;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="Language", type="string",length=10, nullable=true)
      */
-    private $status;
+    protected  $language;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="Status", type="boolean")
      */
-    private $createdAt;
+    protected $status;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $updatedAt;
+    protected $createdAt;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+
+    /**
+     * Unmapped property to handle file uploads
+     */
+    private $file;
+
+
+    /**
+     * BaseLanguage constructor.
+     */
+    public function __construct()
+    {
+        $this->status = false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getWord(): ?string
+    /**
+     * @param mixed $id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWord()
     {
         return $this->word;
     }
 
-    public function setWord(string $word): self
+    /**
+     * @param mixed $word
+     *
+     * @return $this
+     */
+    public function setWord($word)
     {
         $this->word = $word;
-
         return $this;
     }
 
-    public function getDescription(): ?string
+    /**
+     * @return mixed
+     */
+    public function getDescription()
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    /**
+     * @param mixed $description
+     * @return $this
+     */
+    public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 
-    public function getExemple(): ?string
+    /**
+     * @return mixed
+     */
+    public function getExemple()
     {
         return $this->exemple;
     }
 
-    public function setExemple(?string $exemple): self
+    /**
+     * @param mixed $exemple
+     * @return $this
+     */
+    public function setExemple($exemple)
     {
         $this->exemple = $exemple;
-
         return $this;
     }
 
-    public function getUrl(): ?string
+    /**
+     * @return mixed
+     */
+    public function getUrl()
     {
         return $this->url;
     }
 
-    public function setUrl(?string $url): self
+    /**
+     * @param mixed $url
+     * @return $this
+     */
+    public function setUrl($url)
     {
         $this->url = $url;
-
         return $this;
     }
 
-    public function getType(): ?string
+    /**
+     * @return mixed
+     */
+    public function getType()
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    /**
+     * @param mixed $type
+     * @return $this
+     */
+    public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
 
-    public function getStatus(): ?bool
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStatus(): bool
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): self
+    /**
+     * @param bool $status
+     * @return $this
+     */
+    public function setStatus(bool $status): BaseLanguage
     {
         $this->status = $status;
-
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * @param mixed $createdAt
+     * @return BaseLanguage
+     */
+    public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTime
+     */
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * @param DateTime $updatedAt
+     *
+     * @return $this
+     */
+    public function setUpdatedAt(DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
+
 }
