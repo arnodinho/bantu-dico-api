@@ -46,6 +46,8 @@ services:
         container_name: ${UBUNTU_CONTAINER_NAME}
         links:
             - db:mysqldb
+        depends_on:
+            - db
         volumes:
             - ${PROJECT_PATH}:/var/www/html/bantu-dico
         ports:

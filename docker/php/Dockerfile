@@ -7,6 +7,7 @@ RUN apt-get update -qy && \
     apt-get install -y \
     git \
     libicu-dev \
+    iputils-ping \
     unzip \
     zip && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \

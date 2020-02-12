@@ -14,6 +14,6 @@ class French extends BaseLanguage
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
 }
