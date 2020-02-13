@@ -16,7 +16,7 @@ use DateTime;
 class BaseLanguage
 {
     /**
-     * @var mixed
+     * @var int
      */
     protected $id;
 
@@ -48,7 +48,7 @@ class BaseLanguage
     /**
      * @ORM\Column(name="Language", type="string",length=10, nullable=true)
      */
-    protected  $language;
+    protected $language;
 
     /**
      * @ORM\Column(name="Status", type="boolean")
@@ -68,7 +68,7 @@ class BaseLanguage
     /**
      * Unmapped property to handle file uploads
      */
-    private $file;
+    protected $file;
 
 
     /**
@@ -80,7 +80,7 @@ class BaseLanguage
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -88,18 +88,19 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      *
      * @return $this
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getWord()
     {
@@ -107,18 +108,19 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $word
+     * @param string $word
      *
      * @return $this
      */
-    public function setWord($word)
+    public function setWord(string $word)
     {
         $this->word = $word;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -126,17 +128,19 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
+     *
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getExemple()
     {
@@ -144,12 +148,14 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $exemple
+     * @param string $exemple
+     *
      * @return $this
      */
-    public function setExemple($exemple)
+    public function setExemple(string $exemple)
     {
         $this->exemple = $exemple;
+
         return $this;
     }
 
@@ -162,17 +168,19 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $url
+     * @param string $url
+     *
      * @return $this
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getType()
     {
@@ -180,17 +188,19 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $type
+     * @param string $type
+     *
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getLanguage()
     {
@@ -198,12 +208,14 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $language
+     * @param string $language
+     *
      * @return $this
      */
-    public function setLanguage($language)
+    public function setLanguage(string $language)
     {
         $this->language = $language;
+
         return $this;
     }
 
@@ -217,16 +229,18 @@ class BaseLanguage
 
     /**
      * @param bool $status
+     *
      * @return $this
      */
-    public function setStatus(bool $status): BaseLanguage
+    public function setStatus(bool $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
     public function getCreatedAt()
     {
@@ -234,12 +248,14 @@ class BaseLanguage
     }
 
     /**
-     * @param mixed $createdAt
-     * @return BaseLanguage
+     * @param DateTime $createdAt
+     *
+     * @return $this
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -256,11 +272,10 @@ class BaseLanguage
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTime $updatedAt)
+    public function setUpdatedAt(DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
-
 }
