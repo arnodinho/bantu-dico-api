@@ -8,6 +8,7 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
@@ -23,47 +24,47 @@ class BaseLanguage
     /**
      * @ORM\Column(name="word", type="string", length=255)
      */
-    protected $word;
+    protected string $word;
 
     /**
      * @ORM\Column(name="Description", type="string", length=255, nullable=true)
      */
-    protected $description;
+    protected string $description;
 
     /**
      * @ORM\Column(name="Exemple", type="string", length=255, nullable=true)
      */
-    protected $exemple;
+    protected string $exemple;
 
     /**
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
-    protected $url;
+    protected string $url;
 
     /**
      * @ORM\Column(name="Type", type="string", length=30)
      */
-    protected $type;
+    protected string $type;
 
     /**
      * @ORM\Column(name="Language", type="string",length=10, nullable=true)
      */
-    protected $language;
+    protected string $language;
 
     /**
      * @ORM\Column(name="Status", type="boolean")
      */
-    protected $status;
+    protected bool $status;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
      */
-    protected $createdAt;
+    protected DateTime $createdAt;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    protected $updatedAt;
+    protected DateTime $updatedAt;
 
     /**
      * Unmapped property to handle file uploads
@@ -88,21 +89,9 @@ class BaseLanguage
     }
 
     /**
-     * @param int $id
-     *
-     * @return $this
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
-    public function getWord()
+    public function getWord(): string
     {
         return $this->word;
     }
@@ -112,17 +101,16 @@ class BaseLanguage
      *
      * @return $this
      */
-    public function setWord(string $word)
+    public function setWord(string $word): BaseLanguage
     {
         $this->word = $word;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -132,17 +120,16 @@ class BaseLanguage
      *
      * @return $this
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): BaseLanguage
     {
         $this->description = $description;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getExemple()
+    public function getExemple(): string
     {
         return $this->exemple;
     }
@@ -152,17 +139,16 @@ class BaseLanguage
      *
      * @return $this
      */
-    public function setExemple(string $exemple)
+    public function setExemple(string $exemple): BaseLanguage
     {
         $this->exemple = $exemple;
-
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -172,7 +158,7 @@ class BaseLanguage
      *
      * @return $this
      */
-    public function setUrl(string $url)
+    public function setUrl(string $url): BaseLanguage
     {
         $this->url = $url;
 
@@ -182,7 +168,7 @@ class BaseLanguage
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -192,17 +178,16 @@ class BaseLanguage
      *
      * @return $this
      */
-    public function setType(string $type)
+    public function setType(string $type): BaseLanguage
     {
         $this->type = $type;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getLanguage()
+    public function getLanguage(): string
     {
         return $this->language;
     }
@@ -212,7 +197,7 @@ class BaseLanguage
      *
      * @return $this
      */
-    public function setLanguage(string $language)
+    public function setLanguage(string $language): self
     {
         $this->language = $language;
 
@@ -242,7 +227,7 @@ class BaseLanguage
     /**
      * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -262,7 +247,7 @@ class BaseLanguage
     /**
      * @return DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
