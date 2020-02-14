@@ -14,7 +14,7 @@ class Lingala extends BaseLanguage
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected int $id;
 
     public function getId(): ?int
     {

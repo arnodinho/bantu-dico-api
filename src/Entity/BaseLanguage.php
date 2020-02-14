@@ -19,7 +19,7 @@ class BaseLanguage
     /**
      * @var int
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @ORM\Column(name="word", type="string", length=255)

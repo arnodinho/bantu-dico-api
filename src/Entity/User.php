@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -54,10 +56,16 @@ class User implements UserInterface
      */
     protected string $username;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FrenchSango", mappedBy="user")
+     */
+    private $frenchSangos;
+
 
 
     public function __construct()
     {
+        $this->frenchSangos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,6 +197,37 @@ class User implements UserInterface
     public function setGender(string $gender): User
     {
         $this->gender = $gender;
+        return $this;
+    }
+
+    /**
+     * @return Collection|FrenchSango[]
+     */
+    public function getFrenchSangos(): Collection
+    {
+        return $this->frenchSangos;
+    }
+
+    public function addFrenchSango(FrenchSango $frenchSango): self
+    {
+        if (!$this->frenchSangos->contains($frenchSango)) {
+            $this->frenchSangos[] = $frenchSango;
+            $frenchSango->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFrenchSango(FrenchSango $frenchSango): self
+    {
+        if ($this->frenchSangos->contains($frenchSango)) {
+            $this->frenchSangos->removeElement($frenchSango);
+            // set the owning side to null (unless already changed)
+            if ($frenchSango->getUser() === $this) {
+                $frenchSango->setUser(null);
+            }
+        }
+
         return $this;
     }
 }

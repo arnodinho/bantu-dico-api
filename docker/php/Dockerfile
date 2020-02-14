@@ -18,7 +18,7 @@ RUN a2enmod rewrite remoteip
 ADD sango-dico.conf /etc/apache2/sites-available/000-default.conf
 ADD apache.conf /etc/apache2/conf-available/z-bantu-dico.conf
 RUN a2enconf z-bantu-dico
-
+RUN echo 'alias ll="ls -al"' >> ~/.bashrc
 
 # PHP Extensions
 RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
