@@ -61,11 +61,17 @@ class User implements UserInterface
      */
     private $frenchSangos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FrenchLingala", mappedBy="user")
+     */
+    private $frenchLingalas;
+
 
 
     public function __construct()
     {
         $this->frenchSangos = new ArrayCollection();
+        $this->frenchLingalas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -225,6 +231,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($frenchSango->getUser() === $this) {
                 $frenchSango->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FrenchLingala[]
+     */
+    public function getFrenchLingalas(): Collection
+    {
+        return $this->frenchLingalas;
+    }
+
+    public function addFrenchLingala(FrenchLingala $frenchLingala): self
+    {
+        if (!$this->frenchLingalas->contains($frenchLingala)) {
+            $this->frenchLingalas[] = $frenchLingala;
+            $frenchLingala->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFrenchLingala(FrenchLingala $frenchLingala): self
+    {
+        if ($this->frenchLingalas->contains($frenchLingala)) {
+            $this->frenchLingalas->removeElement($frenchLingala);
+            // set the owning side to null (unless already changed)
+            if ($frenchLingala->getUser() === $this) {
+                $frenchLingala->setUser(null);
             }
         }
 

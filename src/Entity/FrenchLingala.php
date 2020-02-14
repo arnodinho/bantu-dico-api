@@ -6,9 +6,9 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\FrenchSangoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\FrenchLingalaRepository")
  */
-class FrenchSango
+class FrenchLingala
 {
     /**
      * @ORM\Id()
@@ -18,19 +18,14 @@ class FrenchSango
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\French")
+     * @ORM\ManyToOne(targetEntity="App\Entity\French"
      */
     private French $french;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Sango")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lingala")
      */
-    private Sango $Sango;
-
-    /**
-     * @ORM\Column(name="Votes", type="integer", nullable=true)
-     */
-    private int $votes;
+    private Lingala $lingala;
 
     /**
      * @ORM\Column(type="boolean")
@@ -38,12 +33,17 @@ class FrenchSango
     private bool $status;
 
     /**
+     * @ORM\Column(name="Votes", type="integer", nullable=true))
+     */
+    private int $votes;
+
+    /**
      * @ORM\Column(name="Likes", type="integer", nullable=true)
      */
     private int $likes;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="frenchSangos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="frenchLingalas")
      */
     private User $user;
 
@@ -63,7 +63,7 @@ class FrenchSango
     private string $descriptionSource;
 
     /**
-     * @ORM\Column(name="description_sango", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description_lingala", type="string", length=255, nullable=true)
      */
     private $descriptionTarget;
 
@@ -95,39 +95,20 @@ class FrenchSango
     }
 
     /**
-     * @return Sango|null
+     * @return Lingala|null
      */
-    public function getSango(): ?Sango
+    public function getLingala(): ?Lingala
     {
-        return $this->Sango;
+        return $this->lingala;
     }
 
     /**
-     * @param Sango|null $Sango
+     * @param Lingala|null $lingala
      * @return $this
      */
-    public function setSango(?Sango $Sango): self
+    public function setLingala(?Lingala $lingala): self
     {
-        $this->Sango = $Sango;
-
-        return $this;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getVotes(): ?int
-    {
-        return $this->votes;
-    }
-
-    /**
-     * @param int|null $votes
-     * @return $this
-     */
-    public function setVotes(?int $votes): self
-    {
-        $this->votes = $votes;
+        $this->lingala = $lingala;
 
         return $this;
     }
@@ -154,16 +135,35 @@ class FrenchSango
     /**
      * @return string|null
      */
-    public function getLikes(): ?string
+    public function getVotes(): ?string
+    {
+        return $this->votes;
+    }
+
+    /**
+     * @param string|null $votes
+     * @return $this
+     */
+    public function setVotes(?string $votes): self
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getLikes(): ?int
     {
         return $this->likes;
     }
 
     /**
-     * @param string|null $likes
+     * @param int|null $likes
      * @return $this
      */
-    public function setLikes(?string $likes): self
+    public function setLikes(?int $likes): self
     {
         $this->likes = $likes;
 
@@ -235,10 +235,6 @@ class FrenchSango
         return $this->descriptionSource;
     }
 
-    /**
-     * @param string|null $descriptionSource
-     * @return $this
-     */
     public function setDescriptionSource(?string $descriptionSource): self
     {
         $this->descriptionSource = $descriptionSource;
