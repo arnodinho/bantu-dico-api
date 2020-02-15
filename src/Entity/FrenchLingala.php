@@ -18,7 +18,7 @@ class FrenchLingala
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\French"
+     * @ORM\ManyToOne(targetEntity="App\Entity\French")
      */
     private French $french;
 
