@@ -40,5 +40,4 @@ class PageHandler extends AbstractHandler
     {
         return $this->pageManager->findById($id);
     }
-
 }
