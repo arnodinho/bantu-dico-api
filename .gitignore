@@ -10,6 +10,8 @@
 
 ##docker
 /docker/mysql/mysql-data/
+/docker/php/ssh/
+/docker/php/gitconfig
 
 ###< symfony/framework-bundle ###
 
@@ -18,3 +20,18 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###

@@ -23,3 +23,9 @@ RUN echo 'alias ll="ls -al"' >> ~/.bashrc
 # PHP Extensions
 RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
 ADD php.ini /usr/local/etc/php/conf.d/app.ini
+
+# add git config
+ADD gitconfig /root/.gitconfig
+
+# add ssh
+ADD ssh /root/.ssh
