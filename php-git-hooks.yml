@@ -1,0 +1,53 @@
+pre-commit:
+    enabled: true
+    execute:
+        composer: false
+        jsonlint: true
+        phplint: true
+        phpmd:
+            enabled: false
+            options: null
+        phpcs:
+            enabled: true
+            standard: ./phpcs.xml.dist
+            ignore: ''
+        php-cs-fixer:
+            enabled: true
+            levels:
+                psr0: false
+                psr1: true
+                psr2: true
+                symfony: false
+            options: '--using-cache=no'
+        phpunit:
+            enabled: false
+            random-mode: false
+            options: null
+            strict-coverage:
+                enabled: true
+                minimum: !!float 90
+            guard-coverage:
+                enabled: true
+                message: 'WARNING!!, your code coverage is lower.'
+    message:
+        right-message: 'HEY ARNODINHO, BEAU GOOOOOOSSE!!'
+        error-message: 'FIX YOUR FUCKING CODE I DON''T GIVE A FUCK!!'
+commit-msg:
+    enabled: true
+    regular-expression: '^\[(T\d|BANTU)-\d+\]\s.+$'
+pre-push:
+    enabled: false
+    execute:
+        phpunit:
+            enabled: false
+            random-mode: false
+            options: null
+            strict-coverage:
+                enabled: true
+                minimum: !!float 90
+            guard-coverage:
+                enabled: true
+                message: 'WARNING!!, your code coverage is lower.'
+    message:
+        right-message: 'PUSH IT!!'
+        error-message: 'YOU CAN NOT PUSH CODE!!'
