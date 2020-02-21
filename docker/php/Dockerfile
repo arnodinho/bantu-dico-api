@@ -29,3 +29,6 @@ ADD gitconfig /root/.gitconfig
 
 # add ssh
 ADD ssh /root/.ssh
+
+#oh-my-git
+RUN git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.bashrc
