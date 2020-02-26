@@ -8,6 +8,7 @@ RUN apt-get update -qy && \
     git \
     libicu-dev \
     iputils-ping \
+    figlet \
     unzip \
     zip && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
@@ -32,3 +33,6 @@ ADD ssh /root/.ssh
 
 #oh-my-git
 RUN git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.bashrc
+
+#figlet
+RUN figlet "Succesfull  build"
