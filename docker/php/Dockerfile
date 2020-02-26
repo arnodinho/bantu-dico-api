@@ -35,4 +35,4 @@ ADD ssh /root/.ssh
 RUN git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.bashrc
 
 #figlet
-RUN figlet "Succesfull  build"
+RUN figlet "Successfull  build"
