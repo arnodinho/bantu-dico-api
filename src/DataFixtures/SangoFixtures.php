@@ -25,7 +25,7 @@ class SangoFixtures extends Fixture
                 ->setExemple(sprintf('exemple sango - %d', $i))
                 ->setUrl(sprintf('url sango  - %d', $i))
                 ->setType(sprintf('type sango - %d', $i))
-                ->setLanguage('French')
+                ->setLanguage('Sango')
                 ->setStatus(true)
                 ->setCreatedAt(new \DateTime('now'))
                 ->setUpdatedAt(new \DateTime('now'));

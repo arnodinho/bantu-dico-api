@@ -25,7 +25,7 @@ class LingalaFixtures extends Fixture
                 ->setExemple(sprintf('exemple lingala - %d', $i))
                 ->setUrl(sprintf('url lingala  - %d', $i))
                 ->setType(sprintf('type lingala - %d', $i))
-                ->setLanguage('French')
+                ->setLanguage('Lingala')
                 ->setStatus(true)
                 ->setCreatedAt(new \DateTime('now'))
                 ->setUpdatedAt(new \DateTime('now'));
