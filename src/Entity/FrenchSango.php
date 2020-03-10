@@ -152,18 +152,18 @@ class FrenchSango
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getLikes(): ?string
+    public function getLikes(): ?int
     {
         return $this->likes;
     }
 
     /**
-     * @param string|null $likes
+     * @param int|null $likes
      * @return $this
      */
-    public function setLikes(?string $likes): self
+    public function setLikes(?int $likes): self
     {
         $this->likes = $likes;
 
