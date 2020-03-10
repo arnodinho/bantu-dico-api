@@ -39,8 +39,7 @@ class FrenchLingalaFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescriptionSource(sprintf('description french source French %s', $i))
                 ->setDescriptionTarget(sprintf('description french target Lingala %s', $i))
             ;
-
-
+            
             $manager->persist($frenchLingala);
             $manager->flush();
         }
