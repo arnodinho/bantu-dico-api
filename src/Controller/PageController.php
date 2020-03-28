@@ -10,17 +10,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Handler\PageHandler;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Page;
-
-
 use Swagger\Annotations as SWG;
-
 use Symfony\Component\HttpFoundation\Response;
-
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
@@ -35,15 +30,15 @@ class PageController
      *
      * @SWG\Response(
      *     response=200,
-     *     description="Get Page By it's Id.",
+     *     description="return page Entity",
      *     @Model(type=Page::class)
      * )
-     * @param Request $request
-     * @return Response
+     * @param int $id
+     * @return Page
+     * @Rest\View(statusCode=Response::HTTP_OK)
      */
-    public function getPageAction(Request $request)
+    public function getPageAction(int $id, PageHandler $pageHandler)
     {
-
-        return new Response('aaa');
+        return $pageHandler->getPageById($id);
     }
 }
