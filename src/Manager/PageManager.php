@@ -6,6 +6,8 @@
  * Time: 16:56.
  */
 
+declare(strict_types=1);
+
 namespace App\Manager;
 
 use App\Entity\Page;
@@ -37,7 +39,7 @@ class PageManager extends AbstractManager
      * @param int $id
      * @return Page|null
      */
-    public function findById(int $id)
+    public function findById(int $id): ?Page
     {
         return $this->repository->find($id);
     }

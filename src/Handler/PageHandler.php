@@ -36,7 +36,7 @@ class PageHandler extends AbstractHandler
      * @param int $id
      * @return Page|null
      */
-    public function getPageById(int $id)
+    public function getPageById(int $id): ?Page
     {
         return $this->pageManager->findById($id);
     }
