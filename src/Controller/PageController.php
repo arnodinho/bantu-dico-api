@@ -36,10 +36,10 @@ class PageController
      * @param int $id
      * @param PageHandler $pageHandler
      *
-     * @return Page
+     * @return Page|null
      * @Rest\View(statusCode=Response::HTTP_OK)
      */
-    public function getPageAction(int $id, PageHandler $pageHandler)
+    public function getPageAction(int $id, PageHandler $pageHandler): ?Page
     {
         return $pageHandler->getPageById($id);
     }
