@@ -34,6 +34,8 @@ class PageController
      *     @Model(type=Page::class)
      * )
      * @param int $id
+     * @param PageHandler $pageHandler
+     *
      * @return Page
      * @Rest\View(statusCode=Response::HTTP_OK)
      */
