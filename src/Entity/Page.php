@@ -43,6 +43,17 @@ class Page
     protected DateTime $updatedAt;
 
     /**
+     * @param int $id
+     * @return Page
+     */
+    public function setId(int $id): Page
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * @return int|null
      */
     public function getId(): ?int

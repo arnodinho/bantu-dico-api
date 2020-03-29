@@ -21,7 +21,7 @@ class PageHandler extends AbstractHandler
     /**
      * @var PageManager
      */
-    private PageManager $pageManager;
+    protected PageManager $pageManager;
 
     /**
      * PageHandler constructor.
@@ -36,7 +36,7 @@ class PageHandler extends AbstractHandler
      * @param int $id
      * @return Page|null
      */
-    public function getPageById(int $id): ?Page
+    public function retrievePageById(int $id): ?Page
     {
         return $this->pageManager->findById($id);
     }

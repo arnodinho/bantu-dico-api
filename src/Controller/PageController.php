@@ -41,6 +41,6 @@ class PageController
      */
     public function getPageAction(int $id, PageHandler $pageHandler): ?Page
     {
-        return $pageHandler->getPageById($id);
+        return $pageHandler->retrievePageById($id);
     }
 }
