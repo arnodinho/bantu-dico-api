@@ -10,6 +10,8 @@ use Exception;
 
 /**
  * Class UserFixtures
+ *
+ * @codeCoverageIgnore
  */
 class UserFixtures extends Fixture
 {

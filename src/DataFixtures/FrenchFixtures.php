@@ -10,6 +10,8 @@ use Exception;
 
 /**
  * Class FrenchFixtures
+ *
+ * @codeCoverageIgnore
  */
 class FrenchFixtures extends Fixture
 {

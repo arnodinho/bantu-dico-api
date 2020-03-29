@@ -11,6 +11,8 @@ use Exception;
 
 /**
  * Class FrenchSangoFixtures
+ *
+ * @codeCoverageIgnore
  */
 class FrenchSangoFixtures extends Fixture implements DependentFixtureInterface
 {

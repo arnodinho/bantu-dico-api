@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Lingala|null findOneBy(array $criteria, array $orderBy = null)
  * @method Lingala[]    findAll()
  * @method Lingala[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @codeCoverageIgnore
  */
 class LingalaRepository extends ServiceEntityRepository
 {

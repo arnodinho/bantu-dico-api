@@ -10,6 +10,8 @@ use Exception;
 
 /**
  * Class SangoFixtures
+ *
+ * @codeCoverageIgnore
  */
 class SangoFixtures extends Fixture
 {

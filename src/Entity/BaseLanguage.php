@@ -13,6 +13,8 @@ use DateTime;
 
 /**
  * Class BaseLanguage.
+ *
+ * @codeCoverageIgnore
  */
 class BaseLanguage
 {

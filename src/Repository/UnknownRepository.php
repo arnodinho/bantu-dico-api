@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Unknown|null findOneBy(array $criteria, array $orderBy = null)
  * @method Unknown[]    findAll()
  * @method Unknown[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @codeCoverageIgnore
  */
 class UnknownRepository extends ServiceEntityRepository
 {

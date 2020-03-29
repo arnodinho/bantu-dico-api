@@ -10,6 +10,8 @@ use Exception;
 
 /**
  * Class LingalaFixtures
+ *
+ * @codeCoverageIgnore
  */
 class LingalaFixtures extends Fixture
 {

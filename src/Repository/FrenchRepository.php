@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method French|null findOneBy(array $criteria, array $orderBy = null)
  * @method French[]    findAll()
  * @method French[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @codeCoverageIgnore
  */
 class FrenchRepository extends ServiceEntityRepository
 {

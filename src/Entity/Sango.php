@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SangoRepository")
+ *
+ * @codeCoverageIgnore
  */
 class Sango extends BaseLanguage
 {

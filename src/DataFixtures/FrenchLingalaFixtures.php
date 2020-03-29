@@ -11,6 +11,8 @@ use Exception;
 
 /**
  * Class FrenchLingalaFixtures
+ *
+ * @codeCoverageIgnore
  */
 class FrenchLingalaFixtures extends Fixture implements DependentFixtureInterface
 {

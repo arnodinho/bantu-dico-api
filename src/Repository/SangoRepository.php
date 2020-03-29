@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Sango|null findOneBy(array $criteria, array $orderBy = null)
  * @method Sango[]    findAll()
  * @method Sango[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @codeCoverageIgnore
  */
 class SangoRepository extends ServiceEntityRepository
 {

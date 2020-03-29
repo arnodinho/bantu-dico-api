@@ -10,6 +10,8 @@ use Exception;
 
 /**
  * Class UnknownFixtures
+ *
+ * @codeCoverageIgnore
  */
 class UnknownFixtures extends Fixture
 {

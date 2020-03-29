@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
+ * @codeCoverageIgnore
  */
 class User implements UserInterface
 {

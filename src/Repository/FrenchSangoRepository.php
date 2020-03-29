@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method FrenchSango|null findOneBy(array $criteria, array $orderBy = null)
  * @method FrenchSango[]    findAll()
  * @method FrenchSango[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @codeCoverageIgnore
  */
 class FrenchSangoRepository extends ServiceEntityRepository
 {

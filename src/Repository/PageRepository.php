@@ -11,6 +11,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Page|null findOneBy(array $criteria, array $orderBy = null)
  * @method Page[]    findAll()
  * @method Page[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @codeCoverageIgnore
  */
 class PageRepository extends ServiceEntityRepository
 {
