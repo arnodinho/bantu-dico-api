@@ -21,6 +21,11 @@ ADD apache.conf /etc/apache2/conf-available/z-bantu-dico.conf
 RUN a2enconf z-bantu-dico
 RUN echo 'alias ll="ls -al"' >> ~/.bashrc
 
+# PHP Extensions  xdebug for php unit  coverage
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
 # PHP Extensions
 RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
 ADD php.ini /usr/local/etc/php/conf.d/app.ini
