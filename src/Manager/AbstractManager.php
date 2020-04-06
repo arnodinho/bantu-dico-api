@@ -20,7 +20,7 @@ class AbstractManager
     /**
      * @var EntityManagerInterface
      */
-    private EntityManagerInterface $em;
+    private $em;
 
     /**
      * AbstractServiceManager constructor.
@@ -38,17 +38,5 @@ class AbstractManager
     protected function getEntityManager(): EntityManagerInterface
     {
         return $this->em;
-    }
-
-    /**
-     * @param  $entity
-     */
-    public function save($entity): void
-    {
-        if (!$this->em->contains($entity)) {
-            $this->em->persist($entity);
-        }
-
-        $this->em->flush();
     }
 }

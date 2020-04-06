@@ -10,12 +10,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Handler;
 
-use App\Entity\Page;
 use App\Handler\PageHandler;
 use App\Manager\PageManager;
 
 use App\Tests\AbstractHandlerTest;
-use App\Tests\AbstractTest;
 use Prophecy\Argument;
 
 /**

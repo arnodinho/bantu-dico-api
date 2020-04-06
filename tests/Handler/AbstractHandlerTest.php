@@ -9,7 +9,7 @@
 namespace App\Tests;
 
 /**
- * Class AbstractTest.
+ * Class AbstractHandlerTest.
  */
 class AbstractHandlerTest extends AbstractTest
 {

@@ -22,7 +22,7 @@ class PageManager extends AbstractManager
     /**
      * @var PageRepository
      */
-    protected PageRepository $repository;
+    protected $repository;
     
     /**
      * PageManager constructor.
