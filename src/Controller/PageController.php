@@ -44,7 +44,7 @@ class PageController
      */
     public function getPageAction(int $id, PageHandler $pageHandler): ?Page
     {
-        return $pageHandler->retrievePageById($id);
+        return $pageHandler->retrieveById($id);
     }
 
     /**
@@ -76,8 +76,8 @@ class PageController
      * @return Page[]|null
      * @Rest\View(statusCode=Response::HTTP_OK)
      */
-    public function getPagesAction(PageHandler $pageHandler): ? array
+    public function getPagesAction(PageHandler $pageHandler): ?array
     {
-        return $pageHandler->retrievePages();
+        return $pageHandler->retrieveAll();
     }
 }

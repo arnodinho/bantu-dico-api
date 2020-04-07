@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Handler;
 
+use App\Entity\Page;
 use App\Handler\PageHandler;
 use App\Manager\PageManager;
 
@@ -39,19 +40,19 @@ class PageHandlerTest extends AbstractHandlerTest
 
     public function testGetPageById(): void
     {
-        $this->mockRetrievePage($this->pageModel);
+        $this->mockRetrieveEntity($this->pageManager, $this->pageModel);
         $this->assertEquals(
             $this->pageModel,
-            $this->pageHandler->retrievePageById($this->pageModel->getId())
+            $this->pageHandler->retrieveById($this->pageModel->getId())
         );
     }
 
-    private function mockRetrievePage($pageModel): void
+    public function testGetPages(): void
     {
-        $this->pageManager->findById(
-            Argument::type('integer')
-        )
-            ->shouldBeCalledOnce()
-            ->willReturn($pageModel);
+        $this->mockRetrieveEntitiesList($this->pageManager, [$this->pageModel]);
+        $this->assertEquals(
+            [$this->pageModel],
+            $this->pageHandler->retrieveAll()
+        );
     }
 }

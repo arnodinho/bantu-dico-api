@@ -13,7 +13,7 @@ use App\Handler\PageHandler;
 use App\Tests\AbstractTest;
 use Prophecy\Argument;
 
-class PageControllerTest extends AbstractTest
+class PageControllerTest extends AbstractControllerTest
 {
     /**
      * @var PageController
@@ -35,15 +35,19 @@ class PageControllerTest extends AbstractTest
 
     public function testGetPageAction(): void
     {
-        $this->pageHandler->retrievePageById(
-            Argument::is($this->pageModel->getId())
-        )
-            ->shouldBeCalledOnce()
-            ->willReturn($this->pageModel);
-
+        $this->mockRetrieveById($this->pageHandler, $this->pageModel);
         $this->assertEquals(
             $this->pageModel,
             $this->pageController->getPageAction($this->pageModel->getId(), $this->pageHandler->reveal())
+        );
+    }
+
+    public function testGetPagesAction(): void
+    {
+        $this->mockRetrieveAll($this->pageHandler, [$this->pageModel]);
+        $this->assertEquals(
+            [$this->pageModel],
+            $this->pageController->getPagesAction($this->pageHandler->reveal())
         );
     }
 }

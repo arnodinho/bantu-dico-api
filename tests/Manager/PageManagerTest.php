@@ -31,15 +31,19 @@ class PageManagerTest extends AbstractManagerTest
 
     public function testFindById():void
     {
-        $this->repository->find(
-            Argument::is($this->pageModel->getId())
-        )
-            ->shouldBeCalledOnce()
-            ->willReturn($this->pageModel);
-
+        $this->mockFindById($this->pageModel);
         $this->assertEquals(
             $this->pageModel,
             $this->pageManager->findById($this->pageModel->getId())
+        );
+    }
+
+    public function testFindAll():void
+    {
+        $this->mockFindAll([$this->pageModel]);
+        $this->assertEquals(
+            [$this->pageModel],
+            $this->pageManager->findAll()
         );
     }
 }

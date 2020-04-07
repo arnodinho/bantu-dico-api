@@ -16,7 +16,7 @@ use App\Manager\PageManager;
 /**
  * Class PageHandler.
  */
-class PageHandler extends AbstractHandler
+class PageHandler extends AbstractHandler implements HandlerInterface
 {
     /**
      * @var PageManager
@@ -36,7 +36,7 @@ class PageHandler extends AbstractHandler
      * @param int $id
      * @return Page|null
      */
-    public function retrievePageById(int $id): ?Page
+    public function retrieveById(int $id)
     {
         return $this->pageManager->findById($id);
     }
@@ -44,7 +44,7 @@ class PageHandler extends AbstractHandler
     /**
      * @return array|null
      */
-    public function retrievePages(): ?array
+    public function retrieveAll(): ?array
     {
         return $this->pageManager->findAll();
     }

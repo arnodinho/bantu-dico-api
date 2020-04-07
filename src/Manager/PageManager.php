@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * Class PageManager.
  */
-class PageManager extends AbstractManager
+class PageManager extends AbstractManager implements ManagerInterface
 {
     /**
      * @var PageRepository
@@ -39,7 +39,7 @@ class PageManager extends AbstractManager
      * @param int $id
      * @return Page|null
      */
-    public function findById(int $id): ?Page
+    public function findById(int $id)
     {
         return $this->repository->find($id);
     }

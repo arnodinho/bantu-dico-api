@@ -45,4 +45,20 @@ class AbstractManagerTest extends AbstractTest
             Argument::is($class)
         )->willReturn($this->repository);
     }
+
+    protected function mockFindById($model): void
+    {
+        $this->repository->find(
+            Argument::is($model->getId())
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($model);
+    }
+
+    protected function mockFindAll($modelTab): void
+    {
+        $this->repository->findAll()
+            ->shouldBeCalledOnce()
+            ->willReturn($modelTab);
+    }
 }
