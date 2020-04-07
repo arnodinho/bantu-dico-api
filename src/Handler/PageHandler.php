@@ -40,4 +40,12 @@ class PageHandler extends AbstractHandler
     {
         return $this->pageManager->findById($id);
     }
+
+    /**
+     * @return array|null
+     */
+    public function retrievePages(): ?array
+    {
+        return $this->pageManager->findAll();
+    }
 }

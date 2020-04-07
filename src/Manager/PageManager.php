@@ -43,4 +43,12 @@ class PageManager extends AbstractManager
     {
         return $this->repository->find($id);
     }
+
+    /**
+     * @return Page[]|object[]
+     */
+    public function findAll(): array
+    {
+        return $this->repository->findAll();
+    }
 }
