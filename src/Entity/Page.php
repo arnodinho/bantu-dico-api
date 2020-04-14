@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
  *
  * @codeCoverageIgnore
+ * @ORM\HasLifecycleCallbacks()
  */
 class Page
 {
@@ -17,32 +18,37 @@ class Page
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $title;
+    private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $language;
+    private $language;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private string $content;
+    private $content;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
      */
-    protected DateTime $createdAt;
+    protected $createdAt;
 
     /**
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    protected DateTime $updatedAt;
+    protected $updatedAt;
+
+    public function __construct()
+    {
+        $this->setCreatedAt(new DateTime('now'));
+    }
 
     /**
      * @param int $id
@@ -75,7 +81,7 @@ class Page
      * @param string $title
      * @return $this
      */
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -141,7 +147,7 @@ class Page
     /**
      * @return DateTime
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
@@ -150,9 +156,23 @@ class Page
      * @param DateTime $updatedAt
      * @return Page
      */
-    public function setUpdatedAt(DateTime $updatedAt): Page
+    public function setUpdatedAt(?DateTime $updatedAt): Page
     {
         $this->updatedAt = $updatedAt;
         return $this;
+    }
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if (null == $this->getCreatedAt()) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 }

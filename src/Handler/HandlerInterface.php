@@ -20,4 +20,10 @@ interface HandlerInterface
      * @return array|null
      */
     public function retrieveAll(): ?array;
+
+    /**
+     * @param $entity
+     * @return bool
+     */
+    public function create($entity);
 }

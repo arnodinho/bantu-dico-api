@@ -48,4 +48,12 @@ class PageHandler extends AbstractHandler implements HandlerInterface
     {
         return $this->pageManager->findAll();
     }
+
+    /**
+     * @param Page $entity
+     */
+    public function create($entity)
+    {
+        $test = 'test';
+    }
 }

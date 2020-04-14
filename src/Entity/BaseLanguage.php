@@ -15,6 +15,7 @@ use DateTime;
  * Class BaseLanguage.
  *
  * @codeCoverageIgnore
+ * @ORM\HasLifecycleCallbacks()
  */
 class BaseLanguage
 {
@@ -264,5 +265,18 @@ class BaseLanguage
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if (null == $this->getCreatedAt()) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 }
