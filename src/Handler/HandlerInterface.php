@@ -25,5 +25,5 @@ interface HandlerInterface
      * @param $entity
      * @return bool
      */
-    public function create($entity);
+    public function create($entity): void;
 }

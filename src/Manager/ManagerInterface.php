@@ -24,4 +24,9 @@ interface ManagerInterface
      * @return array
      */
     public function findAll(): array;
+
+    /**
+     * @param $entity
+     */
+    public function create($entity): void;
 }

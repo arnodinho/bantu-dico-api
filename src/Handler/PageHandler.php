@@ -52,8 +52,8 @@ class PageHandler extends AbstractHandler implements HandlerInterface
     /**
      * @param Page $entity
      */
-    public function create($entity)
+    public function create($entity): void
     {
-        $test = 'test';
+        $this->pageManager->create($entity);
     }
 }

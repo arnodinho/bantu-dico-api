@@ -51,4 +51,13 @@ class PageManager extends AbstractManager implements ManagerInterface
     {
         return $this->repository->findAll();
     }
+
+    /**
+     * @param Page $entity
+     */
+    public function create($entity): void
+    {
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+    }
 }
