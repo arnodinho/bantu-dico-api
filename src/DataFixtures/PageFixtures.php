@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -9,19 +10,18 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 
 /**
- * Class PageFixtures
+ * Class PageFixtures.
  *
  * @codeCoverageIgnore
  */
 class PageFixtures extends Fixture
 {
     /**
-     * @param ObjectManager $manager
      * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $page = new Page();
             $page->setTitle(sprintf('title page - %d', $i))
                 ->setLanguage('French')

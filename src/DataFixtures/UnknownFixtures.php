@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -9,19 +10,18 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 
 /**
- * Class UnknownFixtures
+ * Class UnknownFixtures.
  *
  * @codeCoverageIgnore
  */
 class UnknownFixtures extends Fixture
 {
     /**
-     * @param ObjectManager $manager
      * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $unknown = new Unknown();
             $unknown
                 ->setWord(sprintf('unknown word %d', $i))

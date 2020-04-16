@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @codeCoverageIgnore
  */
-class FrenchLingala
+class FrenchLingala implements StorableEntityInterface
 {
     /**
      * @ORM\Id()

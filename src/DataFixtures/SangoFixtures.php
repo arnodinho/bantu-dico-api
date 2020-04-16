@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -9,19 +10,18 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 
 /**
- * Class SangoFixtures
+ * Class SangoFixtures.
  *
  * @codeCoverageIgnore
  */
 class SangoFixtures extends Fixture
 {
     /**
-     * @param ObjectManager $manager
      * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $sango = new Sango();
             $sango->setWord(sprintf('mot sango - %d', $i))
                 ->setDescription(sprintf('description sango - %d', $i))

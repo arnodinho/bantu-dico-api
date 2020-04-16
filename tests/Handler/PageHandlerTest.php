@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Tests\Handler;
 
 use App\Entity\Page;
+use App\Entity\StorableEntityInterface;
 use App\Handler\PageHandler;
 use App\Manager\PageManager;
 
@@ -24,23 +25,21 @@ use Prophecy\Argument;
 */
 class PageHandlerTest extends AbstractHandlerTest
 {
-    protected $pageManager;
-
     protected PageHandler $pageHandler;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->pageManager = $this->prophesize(PageManager::class);
+        $this->manager = $this->prophesize(PageManager::class);
         $this->pageHandler  = new PageHandler(
-            $this->pageManager->reveal()
+            $this->manager->reveal()
         );
     }
 
     public function testGetPageById(): void
     {
-        $this->mockRetrieveEntity($this->pageManager, $this->pageModel);
+        $this->mockRetrieveEntity($this->pageModel);
         $this->assertEquals(
             $this->pageModel,
             $this->pageHandler->retrieveById($this->pageModel->getId())
@@ -49,10 +48,19 @@ class PageHandlerTest extends AbstractHandlerTest
 
     public function testGetPages(): void
     {
-        $this->mockRetrieveEntitiesList($this->pageManager, [$this->pageModel]);
+        $this->mockRetrieveEntitiesList([$this->pageModel]);
         $this->assertEquals(
             [$this->pageModel],
             $this->pageHandler->retrieveAll()
+        );
+    }
+
+
+    public function testCreate(): void
+    {
+        $this->mockManagerSave($this->pageModel);
+        $this->assertNull(
+            $this->pageHandler->create($this->pageModel)
         );
     }
 }

@@ -19,8 +19,6 @@ class BaseController extends AbstractController
     public const MESG_SUCCESSFULL_OPERATION = 'Successful operation';
 
     /**
-     * @param int $code
-     * @param string $message
      * @return View
      */
     public function sendMessage(int $code, string $message)

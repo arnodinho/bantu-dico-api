@@ -8,21 +8,16 @@
 
 namespace App\Handler;
 
+use App\Entity\StorableEntityInterface;
+
 interface HandlerInterface
 {
     /**
-     * @param int $id
      * @return mixed
      */
     public function retrieveById(int $id);
 
-    /**
-     * @return array|null
-     */
     public function retrieveAll(): ?array;
 
-    /**
-     * @param $entity
-     */
-    public function create($entity): void;
+    public function create(StorableEntityInterface $entity): void;
 }

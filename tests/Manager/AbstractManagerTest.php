@@ -39,7 +39,7 @@ class AbstractManagerTest extends AbstractTest
     /**
      * @param string $class
      */
-    protected function mockRepository($class):void
+    protected function mockRepository($class): void
     {
         $this->em->getRepository(
             Argument::is($class)

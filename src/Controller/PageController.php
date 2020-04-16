@@ -10,16 +10,16 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Page;
 use App\Form\PageType;
 use App\Handler\PageHandler;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use App\Entity\Page;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
  * Class PageController.
@@ -39,10 +39,7 @@ class PageController extends BaseController
      *     @Model(type=Page::class)
      *   )
      * )
-     * @param int $id
-     * @param PageHandler $pageHandler
      *
-     * @return Page|null
      * @Rest\View(statusCode=Response::HTTP_OK)
      */
     public function getPageAction(int $id, PageHandler $pageHandler): ?Page
@@ -67,7 +64,6 @@ class PageController extends BaseController
      *         ),
      *   )
      * )
-     * @param PageHandler $pageHandler
      *
      * @return Page[]|null
      * @Rest\View(statusCode=Response::HTTP_OK)
@@ -94,27 +90,25 @@ class PageController extends BaseController
      *   ),
      *   @SWG\Response(
      *     response=Response::HTTP_CREATED,
-     *     description=BaseController::MESG_SUCCESSFULL_OPERATION,
-     *     @SWG\Schema(ref=@Model(type=Page::class))
+     *     description=BaseController::MESG_SUCCESSFULL_OPERATION
      *   ),
      *   @SWG\Response(response=Response::HTTP_BAD_REQUEST, description="Bad Request")
      * )
-     * @param Request $request
-     * @param PageHandler $pageHandler
+     *
      * @return View
      */
     public function postPageAction(Request $request, PageHandler $pageHandler)
     {
-        $code       = Response::HTTP_CREATED;
-        $message    = self::MESG_SUCCESSFULL_OPERATION;
+        $code = Response::HTTP_CREATED;
+        $message = self::MESG_SUCCESSFULL_OPERATION;
         $page = new Page();
 
         $form = $this->createForm(PageType::class, $page);
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
-            $code       = Response::HTTP_CREATED;
-            $message    = Response::$statusTexts[Response::HTTP_BAD_REQUEST];
+            $code = Response::HTTP_CREATED;
+            $message = Response::$statusTexts[Response::HTTP_BAD_REQUEST];
         }
 
         $pageHandler->create($page);

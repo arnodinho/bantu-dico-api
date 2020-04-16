@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Manager;
 
+use App\Entity\StorableEntityInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -20,23 +21,24 @@ class AbstractManager
     /**
      * @var EntityManagerInterface
      */
-    private $em;
+    protected $em;
 
     /**
      * AbstractServiceManager constructor.
-     *
-     * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
 
-    /**
-     * @return EntityManagerInterface
-     */
     protected function getEntityManager(): EntityManagerInterface
     {
         return $this->em;
+    }
+
+    public function save(StorableEntityInterface $entity): void
+    {
+        $this->em->persist($entity);
+        $this->em->flush();
     }
 }

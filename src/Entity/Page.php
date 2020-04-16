@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @codeCoverageIgnore
  * @ORM\HasLifecycleCallbacks()
  */
-class Page
+class Page implements StorableEntityInterface
 {
     /**
      * @ORM\Id()
@@ -50,10 +50,6 @@ class Page
         $this->setCreatedAt(new DateTime('now'));
     }
 
-    /**
-     * @param int $id
-     * @return Page
-     */
     public function setId(int $id): Page
     {
         $this->id = $id;
@@ -61,17 +57,11 @@ class Page
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
@@ -79,6 +69,7 @@ class Page
 
     /**
      * @param string $title
+     *
      * @return $this
      */
     public function setTitle(?string $title): self
@@ -88,16 +79,12 @@ class Page
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLanguage(): ?string
     {
         return $this->language;
     }
 
     /**
-     * @param string|null $language
      * @return $this
      */
     public function setLanguage(?string $language): self
@@ -107,16 +94,12 @@ class Page
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
     /**
-     * @param string|null $content
      * @return $this
      */
     public function setContent(?string $content): Page
@@ -126,21 +109,15 @@ class Page
         return $this;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return Page
-     */
     public function setCreatedAt(DateTime $createdAt): Page
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -154,16 +131,15 @@ class Page
 
     /**
      * @param DateTime $updatedAt
-     * @return Page
      */
     public function setUpdatedAt(?DateTime $updatedAt): Page
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
     /**
-     *
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */

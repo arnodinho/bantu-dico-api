@@ -23,10 +23,9 @@ class PageManager extends AbstractManager implements ManagerInterface
      * @var PageRepository
      */
     protected $repository;
-    
+
     /**
      * PageManager constructor.
-     * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
     {
@@ -36,7 +35,6 @@ class PageManager extends AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param int $id
      * @return Page|null
      */
     public function findById(int $id)
@@ -50,14 +48,5 @@ class PageManager extends AbstractManager implements ManagerInterface
     public function findAll(): array
     {
         return $this->repository->findAll();
-    }
-
-    /**
-     * @param Page $entity
-     */
-    public function create($entity): void
-    {
-        $this->getEntityManager()->persist($entity);
-        $this->getEntityManager()->flush();
     }
 }

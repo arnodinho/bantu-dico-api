@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -10,23 +11,22 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 
 /**
- * Class FrenchLingalaFixtures
+ * Class FrenchLingalaFixtures.
  *
  * @codeCoverageIgnore
  */
 class FrenchLingalaFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
-     * @param ObjectManager $manager
      * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 1; $i < 20; ++$i) {
             $lingala = $manager->getRepository('App:Lingala')->find($i);
-            $french  = $manager->getRepository('App:French')->find($i);
+            $french = $manager->getRepository('App:French')->find($i);
 
-            $user    = $manager->getRepository('App:User')->findOneBy(['firstname' =>'admin']);
+            $user = $manager->getRepository('App:User')->findOneBy(['firstname' => 'admin']);
 
             $frenchLingala = new FrenchLingala();
 
@@ -41,21 +41,18 @@ class FrenchLingalaFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescriptionSource(sprintf('description french source French %s', $i))
                 ->setDescriptionTarget(sprintf('description french target Lingala %s', $i))
             ;
-            
+
             $manager->persist($frenchLingala);
             $manager->flush();
         }
     }
 
-    /**
-     * @return array
-     */
     public function getDependencies(): array
     {
-        return array(
+        return [
             LingalaFixtures::class,
             FrenchFixtures::class,
             UserFixtures::class,
-        );
+        ];
     }
 }

@@ -10,20 +10,21 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
 
- * phpcs:ignoreFile
+ * phpcs:ignoreFile.
+ *
  * @codeCoverageIgnore
  */
 final class Version20200305090541 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE french (id INT AUTO_INCREMENT NOT NULL, word VARCHAR(255) NOT NULL, Description VARCHAR(255) DEFAULT NULL, Exemple VARCHAR(255) DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, Type VARCHAR(30) NOT NULL, Language VARCHAR(10) DEFAULT NULL, Status TINYINT(1) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE sango (id INT AUTO_INCREMENT NOT NULL, word VARCHAR(255) NOT NULL, Description VARCHAR(255) DEFAULT NULL, Exemple VARCHAR(255) DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, Type VARCHAR(30) NOT NULL, Language VARCHAR(10) DEFAULT NULL, Status TINYINT(1) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -41,10 +42,10 @@ final class Version20200305090541 extends AbstractMigration
         $this->addSql('ALTER TABLE french_sango ADD CONSTRAINT FK_2A6E03B5A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE french_lingala DROP FOREIGN KEY FK_C5C405F37575B956');
         $this->addSql('ALTER TABLE french_sango DROP FOREIGN KEY FK_2A6E03B57575B956');

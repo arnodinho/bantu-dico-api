@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @codeCoverageIgnore
  */
-class User implements UserInterface
+class User implements UserInterface, StorableEntityInterface
 {
     /**
      * @ORM\Id()

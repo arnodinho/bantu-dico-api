@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -9,19 +10,18 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 
 /**
- * Class LingalaFixtures
+ * Class LingalaFixtures.
  *
  * @codeCoverageIgnore
  */
 class LingalaFixtures extends Fixture
 {
     /**
-     * @param ObjectManager $manager
      * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $lingala = new Lingala();
             $lingala->setWord(sprintf('mot lingala - %d', $i))
                 ->setDescription(sprintf('description lingala - %d', $i))

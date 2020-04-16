@@ -8,6 +8,8 @@
 
 namespace App\Tests;
 
+use App\Entity\StorableEntityInterface;
+use App\Manager\ManagerInterface;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -16,32 +18,46 @@ use Prophecy\Prophecy\ObjectProphecy;
  */
 class AbstractHandlerTest extends AbstractTest
 {
+    /**
+     * @var ObjectProphecy
+     */
+    protected ObjectProphecy $manager;
+
     protected function setUp(): void
     {
         parent::setUp();
     }
 
     /**
-     * @param ObjectProphecy $manager
-     * @param $model
+     * @param StorableEntityInterface $entity
      */
-    protected function mockRetrieveEntity(ObjectProphecy $manager, $model): void
+    protected function mockRetrieveEntity(StorableEntityInterface $entity): void
     {
-        $manager->findById(
+        $this->manager->findById(
             Argument::type('integer')
         )
             ->shouldBeCalledOnce()
-            ->willReturn($model);
+            ->willReturn($entity);
     }
 
     /**
      * @param ObjectProphecy $manager
      * @param array $modelTab
      */
-    protected function mockRetrieveEntitiesList(ObjectProphecy $manager, array $modelTab): void
+    protected function mockRetrieveEntitiesList(array $modelTab): void
     {
-        $manager->findAll()
+        $this->manager->findAll()
             ->shouldBeCalledOnce()
             ->willReturn($modelTab);
+    }
+
+    /**
+     * @param StorableEntityInterface $entity
+     */
+    protected function mockManagerSave(StorableEntityInterface $entity): void
+    {
+        $this->manager
+            ->save(Argument::exact($entity))
+            ->shouldBeCalledOnce();
     }
 }

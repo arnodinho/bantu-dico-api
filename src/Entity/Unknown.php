@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @codeCoverageIgnore
  */
-class Unknown
+class Unknown implements StorableEntityInterface
 {
     /**
      * @ORM\Id()

@@ -9,24 +9,14 @@
 namespace App\Manager;
 
 /**
- * Interface ManagerInterface
- * @package App\Manager
+ * Interface ManagerInterface.
  */
 interface ManagerInterface
 {
     /**
-     * @param int $id
      * @return mixed
      */
     public function findById(int $id);
 
-    /**
-     * @return array
-     */
     public function findAll(): array;
-
-    /**
-     * @param $entity
-     */
-    public function create($entity): void;
 }

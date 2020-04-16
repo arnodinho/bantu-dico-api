@@ -13,8 +13,7 @@ use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
- * Class AbstractControllerTest
- * @package App\Tests\Controller
+ * Class AbstractControllerTest.
  */
 class AbstractControllerTest extends AbstractTest
 {
@@ -24,7 +23,6 @@ class AbstractControllerTest extends AbstractTest
     }
 
     /**
-     * @param ObjectProphecy $handler
      * @param $model
      */
     protected function mockRetrieveById(ObjectProphecy $handler, $model): void
@@ -36,10 +34,6 @@ class AbstractControllerTest extends AbstractTest
             ->willReturn($model);
     }
 
-    /**
-     * @param ObjectProphecy $handler
-     * @param array $modelTab
-     */
     protected function mockRetrieveAll(ObjectProphecy $handler, array $modelTab): void
     {
         $handler->retrieveAll()

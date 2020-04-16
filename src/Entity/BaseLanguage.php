@@ -17,7 +17,7 @@ use DateTime;
  * @codeCoverageIgnore
  * @ORM\HasLifecycleCallbacks()
  */
-class BaseLanguage
+class BaseLanguage implements StorableEntityInterface
 {
     /**
      * @var int

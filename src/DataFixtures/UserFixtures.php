@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -9,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 
 /**
- * Class UserFixtures
+ * Class UserFixtures.
  *
  * @codeCoverageIgnore
  */
@@ -18,7 +19,6 @@ class UserFixtures extends Fixture
     const ADMIN_USER_REFERENCE = 'admin-user';
 
     /**
-     * @param ObjectManager $manager
      * @throws Exception
      */
     public function load(ObjectManager $manager)

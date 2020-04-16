@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Entity\Page;
+use App\Entity\StorableEntityInterface;
 use App\Manager\PageManager;
 
 /**
@@ -50,10 +51,10 @@ class PageHandler extends AbstractHandler implements HandlerInterface
     }
 
     /**
-     * @param Page $entity
+     * @param StorableEntityInterface $entity
      */
-    public function create($entity): void
+    public function create(StorableEntityInterface $entity): void
     {
-        $this->pageManager->create($entity);
+        $this->pageManager->save($entity);
     }
 }

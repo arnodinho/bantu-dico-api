@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
- * Class Kernel
+ * Class Kernel.
  *
  * @codeCoverageIgnore
  */

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -10,22 +11,21 @@ use Doctrine\Persistence\ObjectManager;
 use Exception;
 
 /**
- * Class FrenchSangoFixtures
+ * Class FrenchSangoFixtures.
  *
  * @codeCoverageIgnore
  */
 class FrenchSangoFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
-     * @param ObjectManager $manager
      * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i < 20; $i++) {
-            $sango   = $manager->getRepository('App:Sango')->find($i);
-            $french  = $manager->getRepository('App:French')->find($i);
-            $user    = $manager->getRepository('App:User')->findOneBy(['firstname' =>'admin']);
+        for ($i = 1; $i < 20; ++$i) {
+            $sango = $manager->getRepository('App:Sango')->find($i);
+            $french = $manager->getRepository('App:French')->find($i);
+            $user = $manager->getRepository('App:User')->findOneBy(['firstname' => 'admin']);
 
             $frenchLingala = new FrenchSango();
 
@@ -46,15 +46,12 @@ class FrenchSangoFixtures extends Fixture implements DependentFixtureInterface
         }
     }
 
-    /**
-     * @return array
-     */
     public function getDependencies(): array
     {
-        return array(
+        return [
             FrenchFixtures::class,
             SangoFixtures::class,
             UserFixtures::class,
-        );
+        ];
     }
 }
