@@ -9,9 +9,14 @@
 namespace App\Tests\Controller;
 
 use App\Controller\PageController;
+use App\Entity\Page;
 use App\Handler\PageHandler;
-use App\Tests\AbstractTest;
-use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\Test\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class PageControllerTest extends AbstractControllerTest
 {
@@ -21,15 +26,44 @@ class PageControllerTest extends AbstractControllerTest
     protected PageController $pageController;
 
     /**
+     * @var FormFactory
+     */
+    protected $formFactory;
+
+    /**
      * @var PageHandler
      */
     protected $pageHandler;
+
+    /**
+     * @var ObjectProphecy
+     */
+    protected ObjectProphecy $form;
+
+    protected array $payload;
+
+    protected Page $pageModel;
 
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->formFactory =  $this->prophesize(FormFactory::class);
+        $this->form = $this->prophesize(Form::class);
+
         $this->pageHandler =  $this->prophesize(PageHandler::class);
+        $this->payload =  [
+            "title" => "title page - 1250",
+            "language" => "French",
+            "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        ];
+
+        $this->pageModel = (new Page())
+            ->setId(5)
+            ->setTitle('title Mock Pock')
+            ->setLanguage('FR')
+            ->setContent('atzsjsd sukdgskudhqs skdh sdfksdh  sdifhsd');
+
         $this->pageController = new PageController();
     }
 
@@ -49,5 +83,28 @@ class PageControllerTest extends AbstractControllerTest
             [$this->pageModel],
             $this->pageController->getPagesAction($this->pageHandler->reveal())
         );
+    }
+
+    public function testpostPageAction(): void
+    {
+        $request = new Request();
+        $request->request->add($this->payload);
+
+        $form = $this->getMockBuilder(FormInterface::class)->getMock();
+        $form->expects($this->once())->method('submit');
+
+        $formFactory = $this->getMockBuilder(FormFactoryInterface::class)->getMock();
+        $formFactory->expects($this->once())->method('create')->will($this->returnValue($form));
+
+        $pageHandler = $this->getMockBuilder(PageHandler::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $pageHandler->expects($this->once())->method('create');
+
+        $this->mockContainer('form.factory', $formFactory);
+        $this->pageController->setContainer($this->container);
+
+        $this->pageController->postPageAction($request, $pageHandler);
     }
 }

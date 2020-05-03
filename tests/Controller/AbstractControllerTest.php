@@ -8,18 +8,40 @@
 
 namespace App\Tests\Controller;
 
-use App\Tests\AbstractTest;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
  * Class AbstractControllerTest.
  */
-class AbstractControllerTest extends AbstractTest
+class AbstractControllerTest extends TypeTestCase
 {
+    /**
+     * @var ContainerBuilder
+     */
+    protected $container;
+
     protected function setUp(): void
     {
         parent::setUp();
+    }
+
+    protected function initContainer()
+    {
+        if (null === $this->container) {
+            $this->container = new ContainerBuilder();
+        }
+    }
+
+    /**
+     * @param $service
+     */
+    public function mockContainer(string $key, $service)
+    {
+        $this->initContainer();
+        $this->container->set($key, $service);
     }
 
     /**
