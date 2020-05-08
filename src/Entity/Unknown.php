@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\UnknownRepository")
  *
  * @codeCoverageIgnore
+ * @ORM\HasLifecycleCallbacks()
  */
 class Unknown implements StorableEntityInterface
 {
@@ -22,27 +23,27 @@ class Unknown implements StorableEntityInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $word;
+    private $word;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $source;
+    private $source;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $target;
+    private $target;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $origin;
+    private $origin;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTimeInterface $createdAt;
+    private $createdAt;
 
     /**
      * @return int|null
@@ -145,5 +146,17 @@ class Unknown implements StorableEntityInterface
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        if (null === $this->getCreatedAt()) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 }

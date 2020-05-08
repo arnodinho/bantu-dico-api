@@ -266,6 +266,7 @@ class BaseLanguage implements StorableEntityInterface
 
         return $this;
     }
+
     /**
      *
      * @ORM\PrePersist

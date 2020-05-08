@@ -18,9 +18,10 @@ class UnknownType extends AbstractType implements FormTypeInterface
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('language')
-            ->add('content')
+            ->add('word')
+            ->add('source')
+            ->add('target')
+            ->add('origin')
         ;
     }
 

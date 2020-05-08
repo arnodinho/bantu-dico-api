@@ -31,7 +31,7 @@ class UnknownController extends BaseController
      * @SWG\Get(
      *   tags={"unknown word"},
      *   summary="Get Unknown Word By it's Id.",
-     *   description="This section retrive a page by it's id given in url path",
+     *   description="This section retrive a unknown word by it's id given in url path",
      *   produces={"application/json"},
      *   @SWG\Response(
      *     response=200,
@@ -74,7 +74,7 @@ class UnknownController extends BaseController
     }
 
     /**
-     * @Route("/unkown", methods={"POST"})
+     * @Route("/unknown", methods={"POST"})
      * @SWG\Post(
      *   tags={"unknown word"},
      *   summary="unknown word creation",
