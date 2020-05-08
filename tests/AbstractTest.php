@@ -9,6 +9,7 @@
 namespace App\Tests;
 
 use App\Entity\Page;
+use App\Entity\Unknown;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -22,6 +23,11 @@ class AbstractTest extends TestCase
      */
     protected $pageModel;
 
+    /**
+     * @var Unknown|ObjectProphecy
+     */
+    protected $unknownModel;
+
     protected function setUp(): void
     {
         $this->pageModel = (new Page())
@@ -31,5 +37,12 @@ class AbstractTest extends TestCase
             ->setContent('atzsjsd sukdgskudhqs skdh sdfksdh  sdifhsd')
             ->setCreatedAt(new \DateTime('now'))
             ->setUpdatedAt(new \DateTime('now'));
+
+        $this->unknownModel = (new Unknown())
+            ->setId(5)
+            ->setWord('title unknown Pock')
+            ->setSource('French')
+            ->setTarget('Sango')
+            ->setOrigin('app');
     }
 }

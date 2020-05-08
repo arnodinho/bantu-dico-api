@@ -44,6 +44,13 @@ class Unknown implements StorableEntityInterface
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+    
+    public function setId(int $id): Unknown
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * @return int|null
