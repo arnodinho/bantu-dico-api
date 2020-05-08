@@ -5,3 +5,8 @@ page:
   type:     rest
   resource: App\Controller\PageController
   prefix:   /api
+
+unknown:
+  type:     rest
+  resource: App\Controller\UnknownController
+  prefix:   /api

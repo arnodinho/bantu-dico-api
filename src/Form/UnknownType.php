@@ -2,18 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\Page;
+use App\Entity\Unknown;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class PageType.
+ * Class UnknownType.
  *
  * @codeCoverageIgnore
  */
-class PageType extends AbstractType implements FormTypeInterface
+class UnknownType extends AbstractType implements FormTypeInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,7 +32,7 @@ class PageType extends AbstractType implements FormTypeInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Page::class,
+            'data_class' => Unknown::class,
             'csrf_protection' => false,
         ]);
     }
