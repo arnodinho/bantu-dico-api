@@ -8,6 +8,8 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\Page;
+use App\Entity\Unknown;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,9 +25,26 @@ class AbstractControllerTest extends TypeTestCase
      */
     protected $container;
 
+    protected Page $pageModel;
+
+    protected Unknown $unknownModel;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->pageModel = (new Page())
+            ->setId(5)
+            ->setTitle('title Mock Pock')
+            ->setLanguage('FR')
+            ->setContent('atzsjsd sukdgskudhqs skdh sdfksdh  sdifhsd');
+
+        $this->unknownModel = (new Unknown())
+            ->setId(5)
+            ->setWord('title unknown Pock')
+            ->setSource('French')
+            ->setTarget('Sango')
+            ->setOrigin('app');
     }
 
     protected function initContainer()

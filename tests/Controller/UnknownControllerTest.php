@@ -8,9 +8,9 @@
 
 namespace App\Tests\Controller;
 
-use App\Controller\PageController;
-use App\Entity\Page;
-use App\Handler\PageHandler;
+use App\Controller\UnknownController;
+use App\Entity\Unknown;
+use App\Handler\UnknownHandler;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
@@ -18,12 +18,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Test\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class PageControllerTest extends AbstractControllerTest
+class UnknownControllerTest extends AbstractControllerTest
 {
     /**
-     * @var PageController
+     * @var UnknownController
      */
-    protected PageController $pageController;
+    protected UnknownController $unknownController;
 
     /**
      * @var FormFactory
@@ -31,9 +31,9 @@ class PageControllerTest extends AbstractControllerTest
     protected $formFactory;
 
     /**
-     * @var PageHandler
+     * @var UnknownHandler
      */
-    protected $pageHandler;
+    protected $unknownHandler;
 
     /**
      * @var ObjectProphecy
@@ -42,6 +42,8 @@ class PageControllerTest extends AbstractControllerTest
 
     protected array $payload;
 
+    protected Unknown $unknownModel;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -49,35 +51,36 @@ class PageControllerTest extends AbstractControllerTest
         $this->formFactory =  $this->prophesize(FormFactory::class);
         $this->form = $this->prophesize(Form::class);
 
-        $this->pageHandler =  $this->prophesize(PageHandler::class);
+        $this->unknownHandler =  $this->prophesize(UnknownHandler::class);
         $this->payload =  [
-            "title" => "title page - 1250",
-            "language" => "French",
-            "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+            "word" => "unknown word xz",
+            "source" => "french",
+            "target"=> "Lingala",
+            "origin"=> "app"
         ];
 
-        $this->pageController = new PageController();
+        $this->unknownController = new UnknownController();
     }
 
-    public function testGetPageAction(): void
+    public function testGetUnknownAction(): void
     {
-        $this->mockRetrieveById($this->pageHandler, $this->pageModel);
+        $this->mockRetrieveById($this->unknownHandler, $this->unknownModel);
         $this->assertEquals(
-            $this->pageModel,
-            $this->pageController->getPageAction($this->pageModel->getId(), $this->pageHandler->reveal())
+            $this->unknownModel,
+            $this->unknownController->getUnknownAction($this->unknownModel->getId(), $this->unknownHandler->reveal())
         );
     }
 
-    public function testGetPagesAction(): void
+    public function testGetUnknownsAction(): void
     {
-        $this->mockRetrieveAll($this->pageHandler, [$this->pageModel]);
+        $this->mockRetrieveAll($this->unknownHandler, [$this->unknownModel]);
         $this->assertEquals(
-            [$this->pageModel],
-            $this->pageController->getPagesAction($this->pageHandler->reveal())
+            [$this->unknownModel],
+            $this->unknownController->getUnknownsAction($this->unknownHandler->reveal())
         );
     }
 
-    public function testpostPageAction(): void
+    public function testpostUnknownAction(): void
     {
         $request = new Request();
         $request->request->add($this->payload);
@@ -88,15 +91,15 @@ class PageControllerTest extends AbstractControllerTest
         $formFactory = $this->getMockBuilder(FormFactoryInterface::class)->getMock();
         $formFactory->expects($this->once())->method('create')->will($this->returnValue($form));
 
-        $pageHandler = $this->getMockBuilder(PageHandler::class)
+        $unknownHandler = $this->getMockBuilder(UnknownHandler::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $pageHandler->expects($this->once())->method('create');
+        $unknownHandler->expects($this->once())->method('create');
 
         $this->mockContainer('form.factory', $formFactory);
-        $this->pageController->setContainer($this->container);
+        $this->unknownController->setContainer($this->container);
 
-        $this->pageController->postPageAction($request, $pageHandler);
+        $this->unknownController->postUnknownAction($request, $unknownHandler);
     }
 }
