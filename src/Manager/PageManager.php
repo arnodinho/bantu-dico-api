@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Manager;
 
 use App\Entity\Page;
+use App\Entity\StorableEntityInterface;
 use App\Repository\PageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 

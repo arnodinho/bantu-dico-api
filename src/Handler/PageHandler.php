@@ -57,4 +57,11 @@ class PageHandler extends AbstractHandler implements HandlerInterface
     {
         $this->pageManager->save($entity);
     }
+
+    public function deleteById(int $id)
+    {
+        if ($entity = $this->pageManager->findById($id)) {
+            $this->pageManager->delete($entity);
+        }
+    }
 }

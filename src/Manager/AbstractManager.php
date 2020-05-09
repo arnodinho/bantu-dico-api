@@ -41,4 +41,10 @@ class AbstractManager
         $this->em->persist($entity);
         $this->em->flush();
     }
+
+    public function delete(StorableEntityInterface $entity)
+    {
+        $this->em->remove($entity);
+        $this->em->flush();
+    }
 }

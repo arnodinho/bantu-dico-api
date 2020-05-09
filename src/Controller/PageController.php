@@ -115,4 +115,26 @@ class PageController extends BaseController
 
         return $this->sendMessage($code, $message);
     }
+
+    /**
+     * @Route("/page/{id}", methods={"DELETE"}, requirements={"id": "\d+"})
+     * @SWG\Delete(
+     *   tags={"page"},
+     *   summary="Delete Page By it's Id.",
+     *   description="This section delete a page by it's id given in url path",
+     *   produces={"application/json"},
+     *   @SWG\Response(
+     *     response=Response::HTTP_NO_CONTENT,
+     *     description="successful operation"
+     *   )
+     * )
+     *
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @param int $id
+     * @param PageHandler $pageHandler
+     */
+    public function deletePageAction(int $id, PageHandler $pageHandler)
+    {
+        $pageHandler->deleteById($id);
+    }
 }
