@@ -121,7 +121,7 @@ class UnknownController extends BaseController
      * @Route("/unknown/{id}", methods={"DELETE"}, requirements={"id": "\d+"})
      * @SWG\Delete(
      *   tags={"unknown word"},
-     *   summary="Delete Page By it's Id.",
+     *   summary="Delete unknown word By it's Id.",
      *   description="This section delete a unknown word by it's id given in url path",
      *   produces={"application/json"},
      *   @SWG\Response(
