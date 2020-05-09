@@ -11,6 +11,7 @@ namespace App\Tests\Controller;
 use App\Controller\PageController;
 use App\Entity\Page;
 use App\Handler\PageHandler;
+use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
@@ -98,5 +99,17 @@ class PageControllerTest extends AbstractControllerTest
         $this->pageController->setContainer($this->container);
 
         $this->pageController->postPageAction($request, $pageHandler);
+    }
+
+    public function testDeletePageAction(): void
+    {
+        $this->pageHandler->deleteById(
+            Argument::is($this->pageModel->getId())
+        )
+            ->shouldBeCalledOnce();
+
+        $this->assertNull(
+            $this->pageController->deletePageAction($this->pageModel->getId(), $this->pageHandler->reveal())
+        );
     }
 }

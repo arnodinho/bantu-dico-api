@@ -130,8 +130,6 @@ class PageController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     * @param int $id
-     * @param PageHandler $pageHandler
      */
     public function deletePageAction(int $id, PageHandler $pageHandler)
     {

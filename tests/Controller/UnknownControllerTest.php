@@ -11,6 +11,7 @@ namespace App\Tests\Controller;
 use App\Controller\UnknownController;
 use App\Entity\Unknown;
 use App\Handler\UnknownHandler;
+use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
@@ -101,5 +102,17 @@ class UnknownControllerTest extends AbstractControllerTest
         $this->unknownController->setContainer($this->container);
 
         $this->unknownController->postUnknownAction($request, $unknownHandler);
+    }
+
+    public function testDeleteUnknownAction(): void
+    {
+        $this->unknownHandler->deleteById(
+            Argument::is($this->unknownModel->getId())
+        )
+            ->shouldBeCalledOnce();
+
+        $this->assertNull(
+            $this->unknownController->deleteUnknownAction($this->unknownModel->getId(), $this->unknownHandler->reveal())
+        );
     }
 }

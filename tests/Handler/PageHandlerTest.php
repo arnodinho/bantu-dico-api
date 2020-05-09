@@ -52,12 +52,21 @@ class PageHandlerTest extends AbstractHandlerTest
         );
     }
 
-
     public function testCreate(): void
     {
         $this->mockManagerSave($this->pageModel);
         $this->assertNull(
             $this->pageHandler->create($this->pageModel)
+        );
+    }
+
+    public function testDeleteById(): void
+    {
+        $this->mockRetrieveEntityById($this->pageModel->getId(), $this->pageModel);
+        $this->mockDeleteEntity($this->pageModel);
+
+        $this->assertNull(
+            $this->pageHandler->deleteById($this->pageModel->getId())
         );
     }
 }

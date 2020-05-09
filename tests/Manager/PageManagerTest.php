@@ -57,4 +57,16 @@ class PageManagerTest extends AbstractManagerTest
             $this->pageManager->save($this->pageModel)
         );
     }
+
+    public function testDelete(): void
+    {
+        $this->em
+            ->remove(Argument::is($this->pageModel))
+            ->shouldBeCalledOnce();
+        $this->em->flush()->shouldBeCalledOnce();
+
+        $this->assertNull(
+            $this->pageManager->delete($this->pageModel)
+        );
+    }
 }

@@ -52,24 +52,17 @@ class Unknown implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getWord(): ?string
     {
         return $this->word;
     }
 
     /**
-     * @param string $word
      * @return $this
      */
     public function setWord(string $word): self
@@ -79,16 +72,12 @@ class Unknown implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSource(): ?string
     {
         return $this->source;
     }
 
     /**
-     * @param string $source
      * @return $this
      */
     public function setSource(string $source): self
@@ -98,16 +87,12 @@ class Unknown implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTarget(): ?string
     {
         return $this->target;
     }
 
     /**
-     * @param string $target
      * @return $this
      */
     public function setTarget(string $target): self
@@ -117,16 +102,12 @@ class Unknown implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrigin(): ?string
     {
         return $this->origin;
     }
 
     /**
-     * @param string $origin
      * @return $this
      */
     public function setOrigin(string $origin): self
@@ -136,16 +117,12 @@ class Unknown implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $createdAt
      * @return $this
      */
     public function setCreatedAt(DateTimeInterface $createdAt): self
@@ -156,7 +133,6 @@ class Unknown implements StorableEntityInterface
     }
 
     /**
-     *
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */

@@ -116,7 +116,6 @@ class UnknownController extends BaseController
         return $this->sendMessage($code, $message);
     }
 
-
     /**
      * @Route("/unknown/{id}", methods={"DELETE"}, requirements={"id": "\d+"})
      * @SWG\Delete(
@@ -131,8 +130,6 @@ class UnknownController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     * @param int $id
-     * @param UnknownHandler $unknownHandler
      */
     public function deleteUnknownAction(int $id, UnknownHandler $unknownHandler)
     {

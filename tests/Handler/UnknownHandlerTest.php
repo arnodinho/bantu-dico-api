@@ -51,12 +51,21 @@ class UnknownHandlerTest extends AbstractHandlerTest
         );
     }
 
-
     public function testCreate(): void
     {
         $this->mockManagerSave($this->unknownModel);
         $this->assertNull(
             $this->unknownHandler->create($this->unknownModel)
+        );
+    }
+
+    public function testDeleteById(): void
+    {
+        $this->mockRetrieveEntityById($this->unknownModel->getId(), $this->unknownModel);
+        $this->mockDeleteEntity($this->unknownModel);
+
+        $this->assertNull(
+            $this->unknownHandler->deleteById($this->unknownModel->getId())
         );
     }
 }

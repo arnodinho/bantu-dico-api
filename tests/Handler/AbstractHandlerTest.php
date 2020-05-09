@@ -60,4 +60,25 @@ class AbstractHandlerTest extends AbstractTest
             ->save(Argument::exact($entity))
             ->shouldBeCalledOnce();
     }
+
+    /**
+     * @param int $id
+     * @param StorableEntityInterface $entity
+     */
+    protected function mockRetrieveEntityById(int $id, StorableEntityInterface $entity): void
+    {
+        $this->manager->findById(
+            Argument::is($id)
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($entity);
+    }
+
+    /**
+     * @param StorableEntityInterface $entity
+     */
+    protected function mockDeleteEntity(StorableEntityInterface $entity): void
+    {
+        $this->manager->delete(Argument::is($entity))->shouldBeCalledOnce();
+    }
 }
