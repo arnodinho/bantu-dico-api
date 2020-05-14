@@ -60,6 +60,14 @@ class PageHandlerTest extends AbstractHandlerTest
         );
     }
 
+    public function testUpdate(): void
+    {
+        $this->mockManagerSave($this->pageModel);
+        $this->assertNull(
+            $this->pageHandler->update($this->pageModel)
+        );
+    }
+
     public function testDeleteById(): void
     {
         $this->mockRetrieveEntityById($this->pageModel->getId(), $this->pageModel);

@@ -59,6 +59,14 @@ class UnknownHandlerTest extends AbstractHandlerTest
         );
     }
 
+    public function testUpdate(): void
+    {
+        $this->mockManagerSave($this->unknownModel);
+        $this->assertNull(
+            $this->unknownHandler->update($this->unknownModel)
+        );
+    }
+
     public function testDeleteById(): void
     {
         $this->mockRetrieveEntityById($this->unknownModel->getId(), $this->unknownModel);
