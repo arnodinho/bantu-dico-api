@@ -34,7 +34,7 @@ class PageController extends BaseController
      *   description="This section retrive a page by it's id given in url path",
      *   produces={"application/json"},
      *   @SWG\Response(
-     *     response=200,
+     *     response=Response::HTTP_CREATED,
      *     description="successful operation",
      *     @Model(type=Page::class)
      *   )
@@ -130,9 +130,63 @@ class PageController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @param int $id
+     * @param PageHandler $pageHandler
      */
-    public function deletePageAction(int $id, PageHandler $pageHandler)
+    public function deletePageAction(int $id, PageHandler $pageHandler): void
     {
         $pageHandler->deleteById($id);
+    }
+
+    /**
+     * @Route("/page/{id}", methods={"PUT"}, requirements={"id": "\d+"})
+     * @SWG\Put(
+     *   tags={"page"},
+     *   summary="Page update",
+     *   description="Page update page by it's id",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *   @SWG\Parameter(
+     *     in="body",
+     *     name="body",
+     *     description="page body",
+     *     required=true,
+     *     @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="title",
+     *                  type="string",
+     *                  maximum=64
+     *              ),
+     *              @SWG\Property(
+     *                  property="language",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="content",
+     *                  type="string"
+     *              )
+     *     )
+     *   ),
+     *   @SWG\Response(
+     *     response=Response::HTTP_NO_CONTENT,
+     *     description="successful operation"
+     *   )
+     * )
+     *  @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     *
+     * @param int $id
+     * @param Request $request
+     * @param PageHandler $pageHandler
+     */
+    public function putPageAction(int $id, Request $request, PageHandler $pageHandler): void
+    {
+        if ($page = $pageHandler->retrieveById($id)) {
+            $form = $this->createForm(PageType::class, $page);
+            $form->submit($request->request->all());
+
+            if ($form->isValid()) {
+                $pageHandler->update($page);
+            }
+        }
     }
 }

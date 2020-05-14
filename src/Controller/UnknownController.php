@@ -135,4 +135,59 @@ class UnknownController extends BaseController
     {
         $unknownHandler->deleteById($id);
     }
+
+
+    /**
+     * @Route("/unknown/{id}", methods={"PUT"}, requirements={"id": "\d+"})
+     * @SWG\Put(
+     *   tags={"unknown word"},
+     *   summary="update unknown word",
+     *   description="Update unknonw word by it's id",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *   @SWG\Parameter(
+     *     in="body",
+     *     name="body",
+     *     description="unknown word body",
+     *     required=true,
+     *              @SWG\Property(
+     *                  property="word",
+     *                  type="string",
+     *                  maximum=64
+     *              ),
+     *              @SWG\Property(
+     *                  property="source",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="target",
+     *                  type="string"
+     *              ),
+     *              @SWG\Property(
+     *                  property="origin",
+     *                  type="string"
+     *              )
+     *   ),
+     *   @SWG\Response(
+     *     response=Response::HTTP_NO_CONTENT,
+     *     description="successful operation"
+     *   )
+     * )
+     *  @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     *
+     * @param int $id
+     * @param Request $request
+     * @param UnknownHandler $unknownHandler
+     */
+    public function putUnknownAction(int $id, Request $request, UnknownHandler $unknownHandler): void
+    {
+        if ($page = $unknownHandler->retrieveById($id)) {
+            $form = $this->createForm(UnknownType::class, $page);
+            $form->submit($request->request->all());
+
+            if ($form->isValid()) {
+                $unknownHandler->update($page);
+            }
+        }
+    }
 }

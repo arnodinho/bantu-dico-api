@@ -22,4 +22,6 @@ interface HandlerInterface
     public function retrieveAll(): ?array;
 
     public function create(StorableEntityInterface $entity): void;
+
+    public function update(StorableEntityInterface $entity): void;
 }
