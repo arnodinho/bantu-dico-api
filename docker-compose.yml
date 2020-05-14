@@ -1,6 +1,8 @@
 version: '3.7'
 
 services:
+    # MYSQL
+    # ========================
     #  Chaque conteneur commence avec un nom qui lui est propre ; dans notre cas, notre premier conteneur se nommera db
     db:
         image: mysql:latest
@@ -28,6 +30,20 @@ services:
         env_file:
           - ".env"
 
+    # Redis
+    # ========================
+
+    redis:
+        image: redis:4.0.9
+        container_name: ${REDIS_CONTAINER_NAME}
+        hostname: redis
+        volumes:
+            - ${REDIS_CONTAINER_VOLUME}:/var/lib/redis
+        ports:
+            - "6379:6379"
+
+    # PHPMYADMIN
+    # ========================
     #phpmyadmin est attaché au container « db », et il sera accessible sur le port 8181
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -41,11 +57,15 @@ services:
             - db
         env_file:
             - ".env"
+
+    # PHP
+    # ========================
     php:
         build: docker/php # Get our Dockerfile configuration
         container_name: ${UBUNTU_CONTAINER_NAME}
         links:
             - db:mysqldb
+            - redis:redis
         depends_on:
             - db
         volumes:
