@@ -19,6 +19,8 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class PageManager extends AbstractManager implements ManagerInterface
 {
+    public const REDIS_PAGE_NAMESPACE = 'Page';
+
     /**
      * @var PageRepository
      */
@@ -35,11 +37,19 @@ class PageManager extends AbstractManager implements ManagerInterface
     }
 
     /**
+     * @param int $id
      * @return Page|null
      */
     public function findById(int $id)
     {
-        return $this->repository->find($id);
+        if ($page = $this->redis->get($id, self::REDIS_PAGE_NAMESPACE)) {
+            return $page;
+        }
+
+        $page = $this->repository->find($id);
+        $this->redis->set($id, $page, self::REDIS_PAGE_NAMESPACE);
+
+        return $page;
     }
 
     /**

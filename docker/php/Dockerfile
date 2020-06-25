@@ -10,9 +10,28 @@ RUN apt-get update -qy && \
     iputils-ping \
     figlet \
     unzip \
+    redis-server \
     zip && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#Some are bundled with PHP like sockets or opcache. Some need to be installed manually like apcu, redis, or mongodb.
+RUN apt-get update && \
+    pecl channel-update pecl.php.net && \
+    pecl install apcu igbinary mongodb && \
+    # compile Redis with igbinary support
+    pecl bundle redis-3.1.3 && cd redis && phpize && ./configure --enable-redis-igbinary && make && make install && \
+    docker-php-ext-install bcmath sockets && \
+    docker-php-ext-enable apcu igbinary mongodb opcache redis && \
+    docker-php-source delete && \
+    rm -r /tmp/* /var/cache/* /var/www/html/*
+
+RUN echo '\
+opcache.interned_strings_buffer=16\n\
+opcache.load_comments=Off\n\
+opcache.max_accelerated_files=16000\n\
+opcache.save_comments=1\n\
+' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 #apache conf
 RUN a2enmod rewrite remoteip
@@ -41,3 +60,5 @@ RUN git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && ec
 
 #figlet
 RUN figlet "Successfull  build"
+# set redis daemon
+RUN redis-server --daemonize yes

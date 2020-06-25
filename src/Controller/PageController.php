@@ -41,6 +41,9 @@ class PageController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK)
+     * @param int $id
+     * @param PageHandler $pageHandler
+     * @return Page|null
      */
     public function getPageAction(int $id, PageHandler $pageHandler): ?Page
     {

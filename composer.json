@@ -32,7 +32,9 @@
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "ext-redis": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "bruli/php-git-hooks": "^5.9",
