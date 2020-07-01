@@ -15,59 +15,58 @@ use DateTime;
  * Class BaseLanguage.
  *
  * @codeCoverageIgnore
- * @ORM\HasLifecycleCallbacks()
  */
 class BaseLanguage implements StorableEntityInterface
 {
     /**
      * @var int
      */
-    protected int $id;
+    protected $id;
 
     /**
      * @ORM\Column(name="word", type="string", length=255)
      */
-    protected string $word;
+    protected $word;
 
     /**
      * @ORM\Column(name="Description", type="string", length=255, nullable=true)
      */
-    protected string $description;
+    protected $description;
 
     /**
      * @ORM\Column(name="Exemple", type="string", length=255, nullable=true)
      */
-    protected string $exemple;
+    protected $exemple;
 
     /**
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
-    protected string $url;
+    protected $url;
 
     /**
      * @ORM\Column(name="Type", type="string", length=30)
      */
-    protected string $type;
+    protected $type;
 
     /**
      * @ORM\Column(name="Language", type="string",length=10, nullable=true)
      */
-    protected string $language;
+    protected $language;
 
     /**
      * @ORM\Column(name="Status", type="boolean")
      */
-    protected bool $status;
+    protected $status;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
      */
-    protected DateTime $createdAt;
+    protected $createdAt;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    protected DateTime $updatedAt;
+    protected $updatedAt;
 
     /**
      * Unmapped property to handle file uploads
@@ -94,7 +93,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return string
      */
-    public function getWord(): string
+    public function getWord(): ?string
     {
         return $this->word;
     }
@@ -113,7 +112,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -132,7 +131,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return string
      */
-    public function getExemple(): string
+    public function getExemple(): ?string
     {
         return $this->exemple;
     }
@@ -151,7 +150,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -171,7 +170,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -190,7 +189,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return string
      */
-    public function getLanguage(): string
+    public function getLanguage(): ?string
     {
         return $this->language;
     }
@@ -210,7 +209,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return bool
      */
-    public function isStatus(): bool
+    public function isStatus(): ?bool
     {
         return $this->status;
     }
@@ -230,7 +229,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return DateTime
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
@@ -250,7 +249,7 @@ class BaseLanguage implements StorableEntityInterface
     /**
      * @return DateTime
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
@@ -265,19 +264,5 @@ class BaseLanguage implements StorableEntityInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
-    }
-
-    /**
-     *
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updatedTimestamps()
-    {
-        $this->setUpdatedAt(new \DateTime('now'));
-
-        if (null == $this->getCreatedAt()) {
-            $this->setCreatedAt(new \DateTime('now'));
-        }
     }
 }

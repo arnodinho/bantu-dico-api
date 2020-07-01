@@ -140,14 +140,14 @@ class Page implements StorableEntityInterface
     }
 
     /**
-     * @ORM\PrePersist
      * @ORM\PreUpdate
+     * @ORM\PrePersist
      */
     public function updatedTimestamps()
     {
         $this->setUpdatedAt(new \DateTime('now'));
 
-        if (null == $this->getCreatedAt()) {
+        if (empty($this->getCreatedAt())) {
             $this->setCreatedAt(new \DateTime('now'));
         }
     }

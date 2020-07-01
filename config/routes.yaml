@@ -10,3 +10,8 @@ unknown:
   type:     rest
   resource: App\Controller\UnknownController
   prefix:   /api
+
+french:
+  type:     rest
+  resource: App\Controller\FrenchController
+  prefix:   /api

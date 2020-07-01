@@ -16,10 +16,18 @@ class Sango extends BaseLanguage
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    protected int $id;
+    protected $id;
 
-    public function getId(): ?int
+    /**
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     */
+    public function updatedTimestamps()
     {
-        return $this->id;
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if (empty($this->getCreatedAt())) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 }

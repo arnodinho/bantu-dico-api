@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FrenchRepository")
- *
+ * @ORM\HasLifecycleCallbacks()
  * @codeCoverageIgnore
  */
 class French extends BaseLanguage
@@ -16,5 +16,18 @@ class French extends BaseLanguage
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    protected int $id;
+    protected $id;
+
+    /**
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if (empty($this->getCreatedAt())) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+    }
 }
