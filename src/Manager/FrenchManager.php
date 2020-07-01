@@ -35,7 +35,6 @@ class FrenchManager extends AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param int $id
      * @return French|null
      */
     public function findById(int $id)

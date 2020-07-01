@@ -136,7 +136,6 @@ class UnknownController extends BaseController
         $unknownHandler->deleteById($id);
     }
 
-
     /**
      * @Route("/unknown/{id}", methods={"PUT"}, requirements={"id": "\d+"})
      * @SWG\Put(
@@ -174,10 +173,6 @@ class UnknownController extends BaseController
      *   )
      * )
      *  @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     *
-     * @param int $id
-     * @param Request $request
-     * @param UnknownHandler $unknownHandler
      */
     public function putUnknownAction(int $id, Request $request, UnknownHandler $unknownHandler): void
     {

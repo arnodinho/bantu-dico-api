@@ -37,7 +37,6 @@ class PageManager extends AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param int $id
      * @return Page|null
      */
     public function findById(int $id)

@@ -8,8 +8,8 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class BaseLanguage.
@@ -69,10 +69,9 @@ class BaseLanguage implements StorableEntityInterface
     protected $updatedAt;
 
     /**
-     * Unmapped property to handle file uploads
+     * Unmapped property to handle file uploads.
      */
     protected $file;
-
 
     /**
      * BaseLanguage constructor.
@@ -99,13 +98,12 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param string $word
-     *
      * @return $this
      */
     public function setWord(string $word): BaseLanguage
     {
         $this->word = $word;
+
         return $this;
     }
 
@@ -118,13 +116,12 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param string $description
-     *
      * @return $this
      */
     public function setDescription(string $description): BaseLanguage
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -137,13 +134,12 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param string $exemple
-     *
      * @return $this
      */
     public function setExemple(string $exemple): BaseLanguage
     {
         $this->exemple = $exemple;
+
         return $this;
     }
 
@@ -156,8 +152,6 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param string $url
-     *
      * @return $this
      */
     public function setUrl(string $url): BaseLanguage
@@ -176,13 +170,12 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param string $type
-     *
      * @return $this
      */
     public function setType(string $type): BaseLanguage
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -195,8 +188,6 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param string $language
-     *
      * @return $this
      */
     public function setLanguage(string $language): self
@@ -215,8 +206,6 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param bool $status
-     *
      * @return $this
      */
     public function setStatus(bool $status): self
@@ -235,8 +224,6 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param DateTime $createdAt
-     *
      * @return $this
      */
     public function setCreatedAt(DateTime $createdAt): self
@@ -255,8 +242,6 @@ class BaseLanguage implements StorableEntityInterface
     }
 
     /**
-     * @param DateTime $updatedAt
-     *
      * @return $this
      */
     public function setUpdatedAt(DateTime $updatedAt): self

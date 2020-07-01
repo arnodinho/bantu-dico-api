@@ -41,9 +41,6 @@ class PageController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK)
-     * @param int $id
-     * @param PageHandler $pageHandler
-     * @return Page|null
      */
     public function getPageAction(int $id, PageHandler $pageHandler): ?Page
     {
@@ -133,8 +130,6 @@ class PageController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     * @param int $id
-     * @param PageHandler $pageHandler
      */
     public function deletePageAction(int $id, PageHandler $pageHandler): void
     {
@@ -176,10 +171,6 @@ class PageController extends BaseController
      *   )
      * )
      *  @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     *
-     * @param int $id
-     * @param Request $request
-     * @param PageHandler $pageHandler
      */
     public function putPageAction(int $id, Request $request, PageHandler $pageHandler): void
     {

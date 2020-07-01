@@ -41,9 +41,6 @@ class FrenchController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK)
-     * @param int $id
-     * @param FrenchHandler $frenchHandler
-     * @return French|null
      */
     public function getFrenchAction(int $id, FrenchHandler $frenchHandler): ?French
     {
@@ -133,8 +130,6 @@ class FrenchController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     * @param int $id
-     * @param FrenchHandler $frenchHandler
      */
     public function deleteFrenchAction(int $id, FrenchHandler $frenchHandler): void
     {
@@ -210,15 +205,10 @@ class FrenchController extends BaseController
      *   )
      * )
      *  @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     *
-     * @param int $id
-     * @param Request $request
-     * @param FrenchHandler $frenchHandler
      */
     public function putFrenchAction(int $id, Request $request, FrenchHandler $frenchHandler): void
     {
         if ($french = $frenchHandler->retrieveById($id)) {
-
             $form = $this->createForm(FrenchType::class, $french);
 
             $form->submit($request->request->all());
