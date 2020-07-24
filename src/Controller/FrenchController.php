@@ -20,6 +20,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class FrenchController.
@@ -41,6 +42,7 @@ class FrenchController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK)
+     * @throws ExceptionInterface
      */
     public function getFrenchAction(int $id, FrenchHandler $frenchHandler): ?French
     {
