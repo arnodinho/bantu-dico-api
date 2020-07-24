@@ -13,6 +13,7 @@ namespace App\Handler;
 use App\Entity\French;
 use App\Entity\StorableEntityInterface;
 use App\Manager\FrenchManager;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
  * Class FrenchHandler.
@@ -30,16 +31,23 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
      */
     public function __construct(FrenchManager $frenchManager)
     {
+        parent::__construct();
         $this->frenchManager = $frenchManager;
     }
 
     /**
      * @param int $id
-     * @return French|null
+     * @return French|null|mixed
+     * @throws ExceptionInterface
      */
     public function retrieveById(int $id)
     {
-        return $this->frenchManager->findById($id);
+        return $this->serializerHandler
+            ->getSerializer()
+            ->denormalize(
+                $this->frenchManager->findById($id),
+                French::class
+            );
     }
 
     /**

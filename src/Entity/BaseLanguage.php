@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Swagger\Annotations as SWG;
 
 /**
  * Class BaseLanguage.
@@ -19,6 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
 class BaseLanguage implements StorableEntityInterface
 {
     /**
+     * @SWG\Property(format="int64")
+     *
      * @var int
      */
     protected $id;
@@ -29,46 +32,55 @@ class BaseLanguage implements StorableEntityInterface
     protected $word;
 
     /**
+     * @SWG\Property()
      * @ORM\Column(name="Description", type="string", length=255, nullable=true)
      */
     protected $description;
 
     /**
+     * @SWG\Property()
      * @ORM\Column(name="Exemple", type="string", length=255, nullable=true)
      */
     protected $exemple;
 
     /**
+     * @SWG\Property()
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
     protected $url;
 
     /**
+     * @SWG\Property(enum={"nom", "pronom", "verbe", "adjectif"})
      * @ORM\Column(name="Type", type="string", length=30)
      */
     protected $type;
 
     /**
+     * @SWG\Property()
      * @ORM\Column(name="Language", type="string",length=10, nullable=true)
      */
     protected $language;
 
     /**
+     * @SWG\Property()
      * @ORM\Column(name="Status", type="boolean")
      */
     protected $status;
 
     /**
+     * @SWG\Property()
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
     /**
+     * @SWG\Property()
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
+     * @SWG\Property()
      * Unmapped property to handle file uploads.
      */
     protected $file;
@@ -87,6 +99,16 @@ class BaseLanguage implements StorableEntityInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setId(int $id): BaseLanguage
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

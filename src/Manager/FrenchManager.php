@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Manager;
 
 use App\Entity\French;
+use App\Handler\ElasticHandler;
 use App\Repository\FrenchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -32,14 +33,20 @@ class FrenchManager extends AbstractManager implements ManagerInterface
         parent::__construct($em);
 
         $this->repository = $this->getEntityManager()->getRepository(French::class);
+        $this->finder = $this->getElasticsearchIndex(ElasticHandler::INDEX_FRENCH);
     }
 
     /**
-     * @return French|null
+     * @return mixed
      */
     public function findById(int $id)
     {
-        return $this->repository->find($id);
+        $result = $this->finder->search($this->getElasticsearch()->getQuery('id', $id))->getResults();
+        if (!empty($result)) {
+            $result = $this->getElasticsearch()->formatDateFormArrayResult($result[0]->getData());
+        }
+
+        return $result;
     }
 
     /**

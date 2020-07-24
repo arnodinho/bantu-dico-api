@@ -12,7 +12,9 @@ namespace App\Manager;
 
 use App\Cache\RedisCache;
 use App\Entity\StorableEntityInterface;
+use App\Handler\ElasticHandler;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\ElasticaBundle\Elastica\Index;
 
 /**
  * Class AbstractManager.
@@ -24,16 +26,33 @@ class AbstractManager
      */
     protected $em;
 
-    protected RedisCache $redis;
+    /**
+     * @var RedisCache
+     */
+    protected $redis;
+
+    /**
+     * @var ElasticHandler
+     */
+    protected $elasticsearch;
+
+    /**
+     * @var Index
+     */
+    protected $finder;
+
+    protected $boolQuery;
+
+    protected $match;
 
     /**
      * AbstractServiceManager constructor.
-     * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
         $this->redis = RedisCache::getInstance();
+        $this->elasticsearch = new ElasticHandler();
     }
 
     protected function getEntityManager(): EntityManagerInterface
@@ -51,5 +70,15 @@ class AbstractManager
     {
         $this->em->remove($entity);
         $this->em->flush();
+    }
+
+    public function getElasticsearch(): ElasticHandler
+    {
+        return $this->elasticsearch;
+    }
+
+    public function getElasticsearchIndex(string $index): Index
+    {
+        return $this->elasticsearch->getClient()->getIndex($index);
     }
 }

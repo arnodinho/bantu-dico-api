@@ -1,6 +1,35 @@
 # Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
 fos_elastica:
     clients:
-        default: { url: '%env(ELASTICSEARCH_URL)%' }
+        default: { host: elasticsearch, port: 9200 } #you need to set the host to the elasticsearch docker container not localhost|127.0.0.1
     indexes:
-        app: null
+        app:
+            index_name: french
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            custom_analyzer:
+                                type: custom
+                                tokenizer: keyword
+                                filter:  [asciifolding,lowercase]
+            types:
+                french:
+                    properties:
+                        id: { type: integer }
+#                        user_id: ~
+                        word: { type: text, boost: 19, analyzer: custom_analyzer }
+                        type: { type: keyword, boost: 10 }
+                        status: { type: boolean }
+                        url: { type: text }
+                        created_at: { type: date }
+                        updated_at: { type: date }
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: App\Entity\French
+                        provider: ~
+                        listener: ~ # by default, listens to "insert", "update" and "delete"
+                        finder: ~
