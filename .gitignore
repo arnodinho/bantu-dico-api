@@ -10,6 +10,7 @@
 
 ##docker
 /docker/mysql/mysql-data/
+/docker/elasticsearch/elastic-data/
 /docker/mysql/script/
 /docker/php/ssh/
 /docker/php/gitconfig
