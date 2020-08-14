@@ -41,8 +41,6 @@ class AbstractManager
      */
     protected $finder;
 
-    protected $boolQuery;
-
     protected $match;
 
     /**
@@ -80,5 +78,18 @@ class AbstractManager
     public function getElasticsearchIndex(string $index): Index
     {
         return $this->elasticsearch->getClient()->getIndex($index);
+    }
+
+    public function search(string $identifier, $search): array
+    {
+        $result = [];
+
+        $data = $this->finder->search($this->getElasticsearch()->getQuery($identifier, $search))->getResults();
+
+        if (!empty($data)) {
+            $result = $this->getElasticsearch()->formatDateFormArrayResult($data[0]->getData());
+        }
+
+        return $result;
     }
 }

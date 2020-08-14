@@ -36,17 +36,9 @@ class FrenchManager extends AbstractManager implements ManagerInterface
         $this->finder = $this->getElasticsearchIndex(ElasticHandler::INDEX_FRENCH);
     }
 
-    /**
-     * @return mixed
-     */
-    public function findById(int $id)
+    public function findById(int $id): array
     {
-        $result = $this->finder->search($this->getElasticsearch()->getQuery('id', $id))->getResults();
-        if (!empty($result)) {
-            $result = $this->getElasticsearch()->formatDateFormArrayResult($result[0]->getData());
-        }
-
-        return $result;
+        return $this->search('id', $id);
     }
 
     /**

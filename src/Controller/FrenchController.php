@@ -42,6 +42,7 @@ class FrenchController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK)
+     *
      * @throws ExceptionInterface
      */
     public function getFrenchAction(int $id, FrenchHandler $frenchHandler): ?French
@@ -116,6 +117,49 @@ class FrenchController extends BaseController
         $frenchHandler->create($french);
 
         return $this->sendMessage($code, $message);
+    }
+
+    /**
+     * @Route("/french/search", methods={"POST"})
+     * @SWG\Post(
+     *   tags={"French"},
+     *   summary="search french by word or id",
+     *   description="search french word or id",
+     *   consumes={"application/json"},
+     *   @SWG\Parameter(
+     *     in="body",
+     *     name="body",
+     *     description="search french by word or id",
+     *     required=true,
+     *          @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="identifier",
+     *                  type="string",
+     *                  maximum=64
+     *              ),
+     *              @SWG\Property(
+     *                  property="search",
+     *                  type="string"
+     *              )
+     *          )
+     *   ),
+     *   @SWG\Response(
+     *     response=Response::HTTP_OK,
+     *     description=BaseController::MESG_SUCCESSFULL_OPERATION,
+     *     @Model(type=French::class)
+     *   )
+     * )
+     * @Rest\View(statusCode=Response::HTTP_OK)
+     *
+     * @return French|mixed|null
+     *
+     * @throws ExceptionInterface
+     */
+    public function searchFrenchAction(Request $request, FrenchHandler $frenchHandler): ?French
+    {
+        $data = $request->request->all();
+
+        return $frenchHandler->search($data['identifier'], $data['search']);
     }
 
     /**
@@ -206,7 +250,9 @@ class FrenchController extends BaseController
      *     description="successful operation"
      *   )
      * )
-     *  @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     *
+     * @throws ExceptionInterface
      */
     public function putFrenchAction(int $id, Request $request, FrenchHandler $frenchHandler): void
     {

@@ -68,13 +68,32 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
 
     public function deleteById(int $id)
     {
-        if ($entity = $this->frenchManager->findById($id)) {
-            $this->frenchManager->delete($entity);
+        try {
+            if ($entity = $this->retrieveById($id)) {
+                $this->frenchManager->delete($entity);
+            }
+        } catch (ExceptionInterface $e) {
         }
     }
 
     public function update(StorableEntityInterface $entity):void
     {
         $this->frenchManager->save($entity);
+    }
+
+    /**
+     * @param string $identifier
+     * @param string $search
+     * @return French|null|mixed
+     * @throws ExceptionInterface
+     */
+    public function search(string $identifier, string $search): ?French
+    {
+        return $this->serializerHandler
+            ->getSerializer()
+            ->denormalize(
+                $this->frenchManager->search($identifier, $search),
+                French::class
+            );
     }
 }
