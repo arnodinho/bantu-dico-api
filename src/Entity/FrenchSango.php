@@ -27,12 +27,12 @@ class FrenchSango implements StorableEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Sango")
      */
-    private Sango $Sango;
+    private Sango $sango;
 
     /**
      * @ORM\Column(name="Votes", type="integer", nullable=true)
      */
-    private int $votes;
+    private $votes;
 
     /**
      * @ORM\Column(type="boolean")
@@ -101,16 +101,16 @@ class FrenchSango implements StorableEntityInterface
      */
     public function getSango(): ?Sango
     {
-        return $this->Sango;
+        return $this->sango;
     }
 
     /**
-     * @param Sango|null $Sango
+     * @param Sango|null $sango
      * @return $this
      */
-    public function setSango(?Sango $Sango): self
+    public function setSango(?Sango $sango): self
     {
-        $this->Sango = $Sango;
+        $this->sango = $sango;
 
         return $this;
     }

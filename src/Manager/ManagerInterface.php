@@ -13,10 +13,4 @@ namespace App\Manager;
  */
 interface ManagerInterface
 {
-    /**
-     * @return mixed
-     */
-    public function findById(int $id);
-
-    public function findAll(): array;
 }

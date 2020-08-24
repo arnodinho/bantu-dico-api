@@ -56,7 +56,7 @@ class ImportAudioCommand extends Command
         $end   = intval($input->getArgument('end'));
 
 
-        if ($end < $begin) {
+        if (isset($end) && $end < $begin) {
             return $output->writeln('le deuxieme argument doit etre superieur au premier');
         }
 

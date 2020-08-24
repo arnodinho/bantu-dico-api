@@ -20,6 +20,7 @@ class ElasticHandler
     const INDEX_FRENCH = 'french';
     const INDEX_SANGO = 'sango';
     const INDEX_LINGALA = 'lingala';
+    const INDEX_FRENCH_SANGO = 'french_sango';
 
     /**
      * @var Client

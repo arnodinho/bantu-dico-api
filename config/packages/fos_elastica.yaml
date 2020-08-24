@@ -33,3 +33,63 @@ fos_elastica:
                         provider: ~
                         listener: ~ # by default, listens to "insert", "update" and "delete"
                         finder: ~
+        #sango
+        apps:
+            index_name: sango
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            custom_analyzer:
+                                type: custom
+                                tokenizer: keyword
+                                filter:  [asciifolding,lowercase ]
+            types:
+                sango:
+                    properties:
+                        id: { type: integer }
+                        word:  { type: text, boost: 19, analyzer: custom_analyzer }
+                        type: { type: keyword, boost: 10 }
+                        status: { type: boolean }
+                        created_at: { type: date }
+                        updated_at: { type: date }
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: App\Entity\Sango
+                        provider: ~
+                        listener: ~ # by default, listens to "insert", "update" and "delete"
+                        finder: ~
+
+        appfs:
+            index_name: french_sango
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            custom_analyzer:
+                                type: custom
+                                tokenizer: keyword
+                                filter:  [asciifolding,lowercase ]
+            types:
+                french_sango:
+                    properties:
+                        id: { type: integer }
+                        french: { type: text, boost: 19, analyzer: custom_analyzer }
+                        sango:  { type: text, boost: 19, analyzer: custom_analyzer }
+                        votes: { type: integer, boost: 10 }
+                        likes: { type: integer, boost: 10 }
+                        status: { type: boolean }
+                        created_at: { type: date }
+                        updated_at: { type: date }
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: App\Entity\FrenchSango
+                        provider: ~
+                        listener: ~ # by default, listens to "insert", "update" and "delete"
+                        finder: ~
