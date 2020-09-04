@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Sango extends BaseLanguage
 {
+    const PATH_AUDIO = '/public/bundles/main/audio/sango/';
+    const CODE_LANGUAGE_AUDIO = 'es';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

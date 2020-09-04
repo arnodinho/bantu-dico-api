@@ -14,6 +14,7 @@ use App\Entity\FrenchSango;
 use App\Handler\ElasticHandler;
 use App\Repository\FrenchSangoRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 
 /**
  * Class FrenchSangoManager.
@@ -47,5 +48,13 @@ class FrenchSangoManager extends AbstractManager implements ManagerInterface
     public function findAll(): array
     {
         return $this->repository->findAll();
+    }
+
+    /**
+     * @return FrenchSangoRepository|ObjectRepository
+     */
+    public function getRepository()
+    {
+        return $this->repository;
     }
 }

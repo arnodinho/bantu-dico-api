@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Lingala extends BaseLanguage
 {
+    const PATH_AUDIO = '/bundles/main/audio/lingala/';
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

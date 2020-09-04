@@ -15,6 +15,8 @@ use App\Manager\SangoManager;
 use App\Message\SmsNotification;
 use App\Service\ContainerParametersHelper;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /**
@@ -54,21 +56,31 @@ class SmsNotificationHandler implements MessageHandlerInterface
         $this->containerParametersHelper = $containerParametersHelper;
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function __invoke(SmsNotification $message)
     {
-        $frenchSango = $this->frenchSangoManager->findById($message->getFrenchSangodId());
+        $frenchSango = $this->frenchSangoManager->getRepository()->find($message->getFrenchSangodId());
+        $this->download($frenchSango->getFrench(), 'fr');
+        $this->download($frenchSango->getSango(), 'es');
     }
 
+    /**
+     * @throws GuzzleException
+     */
     private function download(
         StorableEntityInterface $entity,
         string $language
     ): void {
-        $path = $entity->getPath();
+        // create file path with mp3 extension
+        $path = sprintf(
+            '%s%s',
+            $this->containerParametersHelper->getApplicationRootDir(),
+            $entity::PATH_AUDIO
+        );
 
-        $filename = $file = $entity->getId().'.mp3';
-
-        // Save MP3 file in folder with .mp3 extension
-        $file = $path.$filename;
+        $file = sprintf('%s%d.mp3', $path, $entity->getId());
 
         // verify CHMOD
         if ('0777' != substr(sprintf('%o', fileperms($path)), -4)) {
@@ -92,7 +104,7 @@ class SmsNotificationHandler implements MessageHandlerInterface
                     ],
                 ]);
 
-            if (200 === $mp3->getStatusCode()) {
+            if (Response::HTTP_OK === $mp3->getStatusCode()) {
                 $contents = $mp3->getBody()->getContents();
 
                 file_put_contents($file, $contents);
@@ -101,8 +113,7 @@ class SmsNotificationHandler implements MessageHandlerInterface
         }
 
         //save url of audio file  in database
-        $entity->setUrl($entity->getBundlePath().$entity->getId().'.mp3');
-        $this->em->persist($entity);
-        $this->em->flush();
+        $entity->setUrl(sprintf('%s%d.mp3', $entity::PATH_AUDIO, $entity->getId()));
+        $this->frenchManager->save($entity);
     }
 }

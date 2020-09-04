@@ -49,4 +49,16 @@ class FrenchSangoRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findMaxId(): int
+    {
+        $qb = $this->createQueryBuilder('fs')
+            ->orderBy('fs.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return current($qb)->getId();
+    }
 }

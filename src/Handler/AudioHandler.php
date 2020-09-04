@@ -8,6 +8,7 @@
 
 namespace App\Handler;
 
+use App\Manager\FrenchSangoManager;
 use App\Message\SmsNotification;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -16,20 +17,31 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 class AudioHandler
 {
+    private const IMPORT_SUCCES = 'data audio created successfully';
+
     /**
      * @var MessageBusInterface
      */
     protected $bus;
 
-    public function __construct(MessageBusInterface $bus)
+    /**
+     * @var FrenchSangoManager
+     */
+    private $frenchSangoManager;
+
+    public function __construct(MessageBusInterface $bus, FrenchSangoManager $frenchSangoManager)
     {
         $this->bus = $bus;
+        $this->frenchSangoManager = $frenchSangoManager;
     }
 
-    public function import(int $begin, int $end = null)
+    public function import(int $begin, int $end = null): string
     {
-        $this->bus->dispatch(new SmsNotification($begin));
+        $end = $end ?? $this->frenchSangoManager->getRepository()->findMaxId();
+        for ($id = $begin; $id <= $end; ++$id) {
+            $this->bus->dispatch(new SmsNotification($id));
+        }
 
-        return 'ok';
+        return  self::IMPORT_SUCCES;
     }
 }

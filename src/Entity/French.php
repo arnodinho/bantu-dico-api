@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class French extends BaseLanguage
 {
+    const PATH_AUDIO = '/public/bundles/main/audio/french/';
+    const CODE_LANGUAGE_AUDIO = 'fr';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -53,8 +53,7 @@ class ImportAudioCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $begin = intval($input->getArgument('begin'));
-        $end   = intval($input->getArgument('end'));
-
+        $end   = !empty($input->getArgument('end'))? intval($input->getArgument('end')): null;
 
         if (isset($end) && $end < $begin) {
             return $output->writeln('le deuxieme argument doit etre superieur au premier');
