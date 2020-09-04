@@ -13,8 +13,6 @@ namespace App\Handler;
 use App\Entity\French;
 use App\Entity\StorableEntityInterface;
 use App\Manager\FrenchManager;
-use GuzzleHttp\Exception\GuzzleException;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 /**
@@ -22,8 +20,6 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
  */
 class FrenchHandler extends AbstractHandler implements HandlerInterface
 {
-    public const URL_YANDEX = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup';
-
     /**
      * @var FrenchManager
      */
@@ -99,36 +95,5 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
                 $this->frenchManager->search($identifier, $search),
                 French::class
             );
-    }
-
-    /**
-     * Check if word exists in french dictionary.
-     *
-     * @param string $word
-     * @return bool
-     * @throws GuzzleException
-     */
-    public function isWordValid(string $word): bool
-    {
-        $response = $this->client
-            ->request('GET', self::URL_YANDEX, [
-                'query' => [
-                    'key' => $_ENV['YANDEX_API_KEY'],
-                    'lang' => 'fr-fr',
-                    'text' => $word
-                ]
-            ]);
-
-        if (Response::HTTP_OK !== $response->getStatusCode()) {
-            return false;
-        }
-
-        $result = json_decode($response->getBody()->getContents());
-
-        if (empty($result->def)) {
-            return false;
-        }
-
-        return true;
     }
 }
