@@ -16,6 +16,7 @@ use App\Handler\FrenchHandler;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
+use GuzzleHttp\Exception\GuzzleException;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
@@ -154,7 +155,7 @@ class FrenchController extends BaseController
      *
      * @return View
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function postFrenchAction(Request $request, FrenchHandler $frenchHandler)
     {
