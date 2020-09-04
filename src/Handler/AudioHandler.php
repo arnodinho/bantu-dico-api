@@ -9,7 +9,7 @@
 namespace App\Handler;
 
 use App\Manager\FrenchSangoManager;
-use App\Message\SmsNotification;
+use App\Message\WordNotification;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
@@ -39,7 +39,7 @@ class AudioHandler
     {
         $end = $end ?? $this->frenchSangoManager->getRepository()->findMaxId();
         for ($id = $begin; $id <= $end; ++$id) {
-            $this->bus->dispatch(new SmsNotification($id));
+            $this->bus->dispatch(new WordNotification($id));
         }
 
         return  self::IMPORT_SUCCES;

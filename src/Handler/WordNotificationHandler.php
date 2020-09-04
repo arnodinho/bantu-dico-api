@@ -12,7 +12,7 @@ use App\Entity\StorableEntityInterface;
 use App\Manager\FrenchManager;
 use App\Manager\FrenchSangoManager;
 use App\Manager\SangoManager;
-use App\Message\SmsNotification;
+use App\Message\WordNotification;
 use App\Service\ContainerParametersHelper;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -20,9 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /**
- * Class SmsNotificationHandler.
+ * Class WordNotificationHandler.
  */
-class SmsNotificationHandler implements MessageHandlerInterface
+class WordNotificationHandler implements MessageHandlerInterface
 {
     /**
      * @var FrenchManager
@@ -59,9 +59,9 @@ class SmsNotificationHandler implements MessageHandlerInterface
     /**
      * @throws GuzzleException
      */
-    public function __invoke(SmsNotification $message)
+    public function __invoke(WordNotification $message)
     {
-        $frenchSango = $this->frenchSangoManager->getRepository()->find($message->getFrenchSangodId());
+        $frenchSango = $this->frenchSangoManager->getRepository()->find($message->getFrenchSangoId());
         $this->download($frenchSango->getFrench(), 'fr');
         $this->download($frenchSango->getSango(), 'es');
     }

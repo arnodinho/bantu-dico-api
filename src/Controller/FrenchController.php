@@ -87,7 +87,7 @@ class FrenchController extends BaseController
      *   @SWG\Parameter(
      *     in="body",
      *     name="body",
-     *     description="Ffrench word creation",
+     *     description="French word creation",
      *     required=true,
      *     @Model(type=French::class)
      *   ),
@@ -114,6 +114,7 @@ class FrenchController extends BaseController
             $message = Response::$statusTexts[Response::HTTP_BAD_REQUEST];
         }
 
+        $frenchHandler->checkWordExists($french->getWord());
         $frenchHandler->create($french);
 
         return $this->sendMessage($code, $message);

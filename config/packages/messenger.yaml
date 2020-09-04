@@ -18,4 +18,4 @@ framework:
         routing:
             # Route your messages to the transports
             # instead of handling a message immediately, you can configure them to be sent to a transport
-#             'App\Message\SmsNotification': async
+             'App\Message\WordNotification': async

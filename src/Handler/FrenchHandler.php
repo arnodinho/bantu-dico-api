@@ -96,4 +96,16 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
                 French::class
             );
     }
+
+    /**
+     * Check if word exists in french dictionary.
+     *
+     * @param string $word
+     * @return bool
+     */
+    public function checkWordExists(string $word): bool
+    {
+        //TODO
+        return true;
+    }
 }
