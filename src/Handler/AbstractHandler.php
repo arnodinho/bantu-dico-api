@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Serializer\SerializerHandler;
+use GuzzleHttp\Client;
 
 /**
  * Class AbstractHandler.
@@ -22,8 +23,14 @@ class AbstractHandler
      */
     protected $serializerHandler;
 
+    /**
+     * @var Client
+     */
+    protected $client;
+
     public function __construct()
     {
         $this->serializerHandler = new SerializerHandler();
+        $this->client = new Client();
     }
 }

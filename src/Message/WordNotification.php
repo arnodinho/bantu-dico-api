@@ -20,7 +20,6 @@ class WordNotification
 
     /**
      * WordNotification constructor.
-     * @param int $frenchSangoId
      */
     public function __construct(int $frenchSangoId)
     {

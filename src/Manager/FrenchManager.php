@@ -48,4 +48,9 @@ class FrenchManager extends AbstractManager implements ManagerInterface
     {
         return $this->repository->findAll();
     }
+
+    public function getRepository(): FrenchRepository
+    {
+        return $this->repository;
+    }
 }

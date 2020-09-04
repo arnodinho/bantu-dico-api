@@ -34,10 +34,7 @@ class UnknownManager extends AbstractManager implements ManagerInterface
         $this->repository = $this->getEntityManager()->getRepository(Unknown::class);
     }
 
-    /**
-     * @return Unknown|null
-     */
-    public function findById(int $id)
+    public function findById(int $id): ?Unknown
     {
         return $this->repository->find($id);
     }

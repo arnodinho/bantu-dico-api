@@ -48,4 +48,9 @@ class SangoManager extends AbstractManager implements ManagerInterface
     {
         return $this->repository->findAll();
     }
+
+    public function getRepository(): SangoRepository
+    {
+        return $this->repository;
+    }
 }

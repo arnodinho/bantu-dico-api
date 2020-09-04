@@ -14,7 +14,6 @@ use App\Manager\FrenchSangoManager;
 use App\Manager\SangoManager;
 use App\Message\WordNotification;
 use App\Service\ContainerParametersHelper;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -22,8 +21,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /**
  * Class WordNotificationHandler.
  */
-class WordNotificationHandler implements MessageHandlerInterface
+class WordNotificationHandler extends AbstractHandler implements MessageHandlerInterface
 {
+    public const URL_TRANSLATE = 'http://translate.google.com/translate_tts';
     /**
      * @var FrenchManager
      */
@@ -50,6 +50,8 @@ class WordNotificationHandler implements MessageHandlerInterface
         FrenchSangoManager $frenchSangoManager,
         ContainerParametersHelper $containerParametersHelper
     ) {
+        parent::__construct();
+
         $this->frenchManager = $frenchManager;
         $this->sangoManager = $sangoManager;
         $this->frenchSangoManager = $frenchSangoManager;
@@ -87,12 +89,10 @@ class WordNotificationHandler implements MessageHandlerInterface
             chmod($path, 0777);
         }
 
-        $client = new Client();
-
         // If MP3 file exists do not create new request
         if (!file_exists($file)) {
-            $mp3 = $client
-                ->request('GET', 'http://translate.google.com/translate_tts', [
+            $mp3 = $this->client
+                ->request('GET', self::URL_TRANSLATE, [
                     'query' => [
                         'ie' => 'UTF-8',
                         'total' => 1,

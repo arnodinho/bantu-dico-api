@@ -27,6 +27,8 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
  */
 class FrenchController extends BaseController
 {
+    public const INVALID_WORD = 'Invalid Word';
+
     /**
      * @Route("/french/{id}", methods={"GET"})
      * @SWG\Get(
@@ -89,7 +91,59 @@ class FrenchController extends BaseController
      *     name="body",
      *     description="French word creation",
      *     required=true,
-     *     @Model(type=French::class)
+     *     @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="word",
+     *                  type="string",
+     *                  maximum=255
+     *              ),
+     *              @SWG\Property(
+     *                  property="Description",
+     *                  type="string",
+     *                  maximum=255
+     *              ),
+     *              @SWG\Property(
+     *                  property="Exemple",
+     *                  type="string",
+     *                  maximum=255
+     *              ),
+     *              @SWG\Property(
+     *                  property="Url",
+     *                  type="string",
+     *                  maximum=255
+     *              ),
+     *              @SWG\Property(
+     *                  property="Type",
+     *                  type="string",
+     *                  enum={
+     *                      "nom",
+     *                      "Pronom",
+     *                      "adjectif",
+     *                      "verbe",
+     *                      "préposition",
+     *                      "conjonction",
+     *                      "Adjectif numéral",
+     *                      "Adjectif"
+     *                  }
+     *              ),
+     *              @SWG\Property(
+     *                  property="Language",
+     *                  type="string",
+     *                  enum={
+     *                      "French",
+     *                      "Sango",
+     *                      "Lingala",
+     *                  }
+     *              ),
+     *              @SWG\Property(
+     *                  property="Status",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="checkValidity",
+     *                  type="boolean"
+     *              )
+     *     )
      *   ),
      *   @SWG\Response(
      *     response=Response::HTTP_CREATED,
@@ -99,22 +153,35 @@ class FrenchController extends BaseController
      * )
      *
      * @return View
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function postFrenchAction(Request $request, FrenchHandler $frenchHandler)
     {
         $code = Response::HTTP_CREATED;
         $message = self::MESG_SUCCESSFULL_OPERATION;
         $french = new French();
+        $payload = $request->request->all();
+        $checkValidity = false;
 
-        $form = $this->createForm(FrenchType::class, $french);
-        $form->submit($request->request->all());
-
-        if (!$form->isValid()) {
-            $code = Response::HTTP_CREATED;
-            $message = Response::$statusTexts[Response::HTTP_BAD_REQUEST];
+        if (!empty($payload['checkValidity'])) {
+            $checkValidity = $payload['checkValidity'];
+            unset($payload['checkValidity']);
         }
 
-        $frenchHandler->checkWordExists($french->getWord());
+        $form = $this->createForm(FrenchType::class, $french);
+        $form->submit($payload);
+
+        if (!$form->isValid()) {
+            return $this->sendMessage(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                Response::$statusTexts[Response::HTTP_BAD_REQUEST]
+            );
+        }
+        if ($checkValidity && !$frenchHandler->isWordValid($french->getWord())) {
+            return $this->sendMessage(Response::HTTP_INTERNAL_SERVER_ERROR, self::INVALID_WORD);
+        }
+
         $frenchHandler->create($french);
 
         return $this->sendMessage($code, $message);
