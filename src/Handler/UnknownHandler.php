@@ -30,6 +30,7 @@ class UnknownHandler extends AbstractHandler implements HandlerInterface
      */
     public function __construct(UnknownManager $unknownManager)
     {
+        parent::__construct();
         $this->unknownManager = $unknownManager;
     }
 

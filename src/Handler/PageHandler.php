@@ -30,6 +30,7 @@ class PageHandler extends AbstractHandler implements HandlerInterface
      */
     public function __construct(PageManager $pageManager)
     {
+        parent::__construct();
         $this->pageManager = $pageManager;
     }
 

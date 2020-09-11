@@ -83,7 +83,7 @@ class FrenchController extends BaseController
      * @Route("/french", methods={"POST"})
      * @SWG\Post(
      *   tags={"French"},
-     *   summary="French creation",
+     *   summary="French Word creation",
      *   description="French creation",
      *   consumes={"application/json"},
      *   produces={"application/json"},
@@ -150,6 +150,10 @@ class FrenchController extends BaseController
      *     response=Response::HTTP_CREATED,
      *     description=BaseController::MESG_SUCCESSFULL_OPERATION
      *   ),
+     *   @SWG\Response(
+     *     response=Response::HTTP_INTERNAL_SERVER_ERROR,
+     *     description=FrenchController::INVALID_WORD
+     *   ),
      *   @SWG\Response(response=Response::HTTP_BAD_REQUEST, description="Bad Request")
      * )
      *
@@ -159,8 +163,6 @@ class FrenchController extends BaseController
      */
     public function postFrenchAction(Request $request, FrenchHandler $frenchHandler)
     {
-        $code = Response::HTTP_CREATED;
-        $message = self::MESG_SUCCESSFULL_OPERATION;
         $french = new French();
         $payload = $request->request->all();
         $checkValidity = false;
@@ -179,13 +181,14 @@ class FrenchController extends BaseController
                 Response::$statusTexts[Response::HTTP_BAD_REQUEST]
             );
         }
+
         if ($checkValidity && !$frenchHandler->isWordValid($french->getWord())) {
             return $this->sendMessage(Response::HTTP_INTERNAL_SERVER_ERROR, self::INVALID_WORD);
         }
 
         $frenchHandler->create($french);
 
-        return $this->sendMessage($code, $message);
+        return $this->sendMessage(Response::HTTP_CREATED, self::MESG_SUCCESSFULL_OPERATION);
     }
 
     /**
