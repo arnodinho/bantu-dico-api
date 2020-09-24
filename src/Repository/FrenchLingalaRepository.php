@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  *
  * @codeCoverageIgnore
  */
-class FrenchLingalaRepository extends ServiceEntityRepository
+class FrenchLingalaRepository extends ServiceEntityRepository implements StorableRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

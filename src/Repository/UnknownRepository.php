@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  *
  * @codeCoverageIgnore
  */
-class UnknownRepository extends ServiceEntityRepository
+class UnknownRepository extends ServiceEntityRepository implements StorableRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  *
  * @codeCoverageIgnore
  */
-class PageRepository extends ServiceEntityRepository
+class PageRepository extends ServiceEntityRepository implements StorableRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -8,6 +8,7 @@
 
 namespace App\Tests;
 
+use App\Entity\French;
 use App\Entity\Page;
 use App\Entity\Unknown;
 use PHPUnit\Framework\TestCase;
