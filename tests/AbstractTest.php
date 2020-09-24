@@ -28,6 +28,11 @@ class AbstractTest extends TestCase
      */
     protected $unknownModel;
 
+    /**
+     * @var French|ObjectProphecy
+     */
+    protected $frenchModel;
+
     protected function setUp(): void
     {
         $this->pageModel = (new Page())
@@ -44,5 +49,17 @@ class AbstractTest extends TestCase
             ->setSource('French')
             ->setTarget('Sango')
             ->setOrigin('app');
+
+        $this->frenchModel = (new French())
+            ->setWord('french mock')
+            ->setDescription('french description mock')
+            ->setExemple('french exemple mock')
+            ->setUrl('french url mock')
+            ->setType('type - 0')
+            ->setLanguage('French')
+            ->setStatus(true)
+            ->setCreatedAt(new \DateTime('now'))
+            ->setUpdatedAt(new \DateTime('now'))
+            ;
     }
 }
