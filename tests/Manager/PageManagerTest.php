@@ -11,6 +11,7 @@ namespace App\Tests\Manager;
 use App\Entity\Page;
 use App\Manager\PageManager;
 use App\Tests\AbstractManagerTest;
+use Doctrine\Persistence\ObjectRepository;
 use Prophecy\Argument;
 
 class PageManagerTest extends AbstractManagerTest

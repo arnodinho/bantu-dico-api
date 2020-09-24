@@ -11,6 +11,7 @@ namespace App\Tests\Manager;
 use App\Entity\Unknown;
 use App\Manager\UnknownManager;
 use App\Tests\AbstractManagerTest;
+use Doctrine\Persistence\ObjectRepository;
 use Prophecy\Argument;
 
 class UnknownManagerTest extends AbstractManagerTest
@@ -24,6 +25,7 @@ class UnknownManagerTest extends AbstractManagerTest
     {
         parent::setUp();
 
+        $this->repository = $this->prophesize(ObjectRepository::class);
         $this->mockRepository(Unknown::class);
         $this->unknownManager = new UnknownManager($this->em->reveal());
     }

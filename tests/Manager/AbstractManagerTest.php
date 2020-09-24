@@ -33,7 +33,6 @@ class AbstractManagerTest extends AbstractTest
         parent::setUp();
 
         $this->em = $this->prophesize(EntityManagerInterface::class);
-        $this->repository = $this->prophesize(ObjectRepository::class);
     }
 
     /**

@@ -10,6 +10,7 @@ namespace App\Tests\Manager;
 
 use App\Entity\French;
 use App\Manager\FrenchManager;
+use App\Repository\FrenchRepository;
 use App\Tests\AbstractManagerTest;
 
 class FrenchManagerTest extends AbstractManagerTest
@@ -23,6 +24,7 @@ class FrenchManagerTest extends AbstractManagerTest
     {
         parent::setUp();
 
+        $this->repository = $this->prophesize(FrenchRepository::class);
         $this->mockRepository(French::class);
         $this->frenchManager = new FrenchManager($this->em->reveal());
     }
@@ -33,6 +35,14 @@ class FrenchManagerTest extends AbstractManagerTest
         $this->assertEquals(
             [$this->frenchModel],
             $this->frenchManager->findAll()
+        );
+    }
+
+    public function testGetRepository(): void
+    {
+        $this->assertEquals(
+            $this->repository->reveal(),
+            $this->frenchManager->getRepository()
         );
     }
 }
