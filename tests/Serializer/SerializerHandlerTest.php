@@ -16,15 +16,9 @@ use Symfony\Component\Serializer\Serializer;
 
 class SerializerHandlerTest extends TestCase
 {
-    /**
-     * @var Serializer
-     */
-    protected $serializer;
+    protected Serializer $serializer;
 
-    /**
-     * @var SerializerHandler
-     */
-    protected $serializerHandler;
+    protected SerializerHandler $serializerHandler;
 
     protected function setUp(): void
     {
