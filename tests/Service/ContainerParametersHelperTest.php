@@ -41,5 +41,10 @@ class ContainerParametersHelperTest extends TestCase
 
     public function testGetApplicationRootDir()
     {
+        $this->params->get(Argument::is('kernel.project_dir'))->shouldBeCalledOnce()->willReturn('BOO');
+        $this->assertEquals(
+            'BOO',
+            $this->containerParametersHelper->getApplicationRootDir()
+        );
     }
 }

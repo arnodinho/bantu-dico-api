@@ -32,11 +32,6 @@ class AbstractManager
     protected $redis;
 
     /**
-     * @var ElasticHandler
-     */
-    protected $elasticsearch;
-
-    /**
      * @var Index
      */
     protected $finder;
@@ -50,7 +45,6 @@ class AbstractManager
     {
         $this->em = $em;
         $this->redis = RedisCache::getInstance();
-        $this->elasticsearch = new ElasticHandler();
     }
 
     protected function getEntityManager(): EntityManagerInterface
@@ -64,30 +58,26 @@ class AbstractManager
         $this->em->flush();
     }
 
-    public function delete(StorableEntityInterface $entity)
+    public function delete(StorableEntityInterface $entity): void
     {
         $this->em->remove($entity);
         $this->em->flush();
     }
 
-    public function getElasticsearch(): ElasticHandler
-    {
-        return $this->elasticsearch;
-    }
-
     public function getElasticsearchIndex(string $index): Index
     {
-        return $this->elasticsearch->getClient()->getIndex($index);
+        return ElasticHandler::getInstance()->getClient()->getIndex($index);
     }
 
     public function search(string $identifier, $search): array
     {
         $result = [];
 
-        $data = $this->finder->search($this->getElasticsearch()->getQuery($identifier, $search))->getResults();
+        $data = $this->finder->search(ElasticHandler::getInstance()->getQuery($identifier, $search))->getResults();
 
         if (!empty($data)) {
-            $result = $this->getElasticsearch()->formatDateFormArrayResult($data[0]->getData());
+            $data = $data[0]->getData();
+            $result = ElasticHandler::getInstance()->formatDateFormArrayResult($data);
         }
 
         return $result;

@@ -45,7 +45,7 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
         return $this->serializerHandler
             ->getSerializer()
             ->denormalize(
-                $this->frenchManager->findById($id),
+                $this->frenchManager->search('id', $id),
                 French::class
             );
     }
@@ -66,13 +66,14 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
         $this->frenchManager->save($entity);
     }
 
+    /**
+     * @param int $id
+     * @throws ExceptionInterface
+     */
     public function deleteById(int $id)
     {
-        try {
-            if ($entity = $this->retrieveById($id)) {
-                $this->frenchManager->delete($entity);
-            }
-        } catch (ExceptionInterface $e) {
+        if ($entity = $this->retrieveById($id)) {
+            $this->frenchManager->delete($entity);
         }
     }
 

@@ -10,7 +10,9 @@ namespace App\Tests;
 
 use App\Entity\French;
 use App\Entity\Page;
+use App\Entity\Sango;
 use App\Entity\Unknown;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -19,6 +21,11 @@ use Prophecy\Prophecy\ObjectProphecy;
  */
 class AbstractTest extends TestCase
 {
+    /**
+     * @var ObjectProphecy
+     */
+    protected $em;
+
     /**
      * @var Page|ObjectProphecy
      */
@@ -34,8 +41,20 @@ class AbstractTest extends TestCase
      */
     protected $frenchModel;
 
+    /**
+     * @var French|ObjectProphecy
+     */
+    protected $sangoModel;
+
+    /**
+     * @var array
+     */
+    protected $frenchDataFormated;
+
     protected function setUp(): void
     {
+        $this->em = $this->prophesize(EntityManagerInterface::class);
+
         $this->pageModel = (new Page())
             ->setId(5)
             ->setTitle('title Mock Pock')
@@ -52,15 +71,35 @@ class AbstractTest extends TestCase
             ->setOrigin('app');
 
         $this->frenchModel = (new French())
-            ->setWord('french mock')
-            ->setDescription('french description mock')
-            ->setExemple('french exemple mock')
-            ->setUrl('french url mock')
-            ->setType('type - 0')
-            ->setLanguage('French')
+            ->setId(5)
+            ->setWord('mot - 4')
+            ->setUrl('/public/bundles/main/audio/french/5.mp3')
+            ->setType('type - 4')
             ->setStatus(true)
-            ->setCreatedAt(new \DateTime('now'))
-            ->setUpdatedAt(new \DateTime('now'))
+            ->setCreatedAt(new \DateTime('2020-04-15T10:11:28+02:00'))
+            ->setUpdatedAt(new \DateTime('2020-09-04T19:05:59+02:00'))
             ;
+
+        $this->sangoModel = (new Sango())
+            ->setWord('mot sango - 5')
+            ->setDescription('description sango - 5')
+            ->setExemple('exemple sango - 5')
+            ->setUrl('/public/bundles/main/audio/sango/6.mp3')
+            ->setType('type sango - 5')
+            ->setLanguage('Sango')
+            ->setStatus(true)
+            ->setCreatedAt(new \DateTime('2020-04-15 10:11:28'))
+            ->setUpdatedAt(new \DateTime('2020-04-15 10:11:28'))
+        ;
+
+        $this->frenchDataFormated = [
+            "id" => 5,
+            "word" => "mot - 4",
+            "type" => "type - 4",
+            "status" => true,
+            "url" => "/public/bundles/main/audio/french/5.mp3",
+            "created_at" => \DateTime::createFromFormat('Y-m-d\TH:i:sP', "2020-04-15T10:11:28+02:00"),
+            "updated_at" => \DateTime::createFromFormat('Y-m-d\TH:i:sP', "2020-09-04T19:05:59+02:00")
+        ];
     }
 }

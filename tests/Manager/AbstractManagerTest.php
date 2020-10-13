@@ -8,21 +8,24 @@
 
 namespace App\Tests;
 
+use App\Entity\StorableEntityInterface;
+use App\Handler\ElasticHandler;
 use App\Repository\PageRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectRepository;
+use FOS\ElasticaBundle\Elastica\Index;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 
 /**
  * Class AbstractManagerTest.
  */
 class AbstractManagerTest extends AbstractTest
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
 
+    /**
+     * @var ObjectProphecy
+     */
+    protected $indexElasticSearch;
     /**
      * @var PageRepository
      */
@@ -31,8 +34,7 @@ class AbstractManagerTest extends AbstractTest
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->em = $this->prophesize(EntityManagerInterface::class);
+        $this->indexElasticSearch = $this->prophesize(Index::class)->reveal();
     }
 
     /**
@@ -59,5 +61,14 @@ class AbstractManagerTest extends AbstractTest
         $this->repository->findAll()
             ->shouldBeCalledOnce()
             ->willReturn($modelTab);
+    }
+    protected function mockSearch(array $model): void
+    {
+        $elasticHandler = $this->prophesize(ElasticHandler::class);
+        $elasticHandler->formatDateFormArrayResult(Argument::is('array'))
+            ->shouldBeCalled()
+            ->willReturn($model)
+
+        ;
     }
 }

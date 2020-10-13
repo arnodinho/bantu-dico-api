@@ -9,6 +9,7 @@
 namespace App\Tests\Manager;
 
 use App\Entity\French;
+use App\Handler\ElasticHandler;
 use App\Manager\FrenchManager;
 use App\Repository\FrenchRepository;
 use App\Tests\AbstractManagerTest;
@@ -43,6 +44,14 @@ class FrenchManagerTest extends AbstractManagerTest
         $this->assertEquals(
             $this->repository->reveal(),
             $this->frenchManager->getRepository()
+        );
+    }
+
+    public function testSearch(): void
+    {
+        $this->assertEquals(
+            $this->frenchDataFormated,
+            $this->frenchManager->search('id', 5)
         );
     }
 }

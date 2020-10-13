@@ -9,23 +9,33 @@
 namespace App\Tests;
 
 use App\Entity\StorableEntityInterface;
-use App\Manager\ManagerInterface;
+use App\Serializer\SerializerHandler;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class AbstractHandlerTest.
  */
 class AbstractHandlerTest extends AbstractTest
 {
+    protected ObjectProphecy $manager;
+
     /**
      * @var ObjectProphecy
      */
-    protected ObjectProphecy $manager;
+    protected $serializerHandler;
+
+    /**
+     * @var ObjectProphecy
+     */
+    protected $serializer;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this->serializer = $this->prophesize(Serializer::class);
+        $this->serializerHandler = $this->prophesize(SerializerHandler::class);
     }
 
     /**
@@ -35,6 +45,19 @@ class AbstractHandlerTest extends AbstractTest
     {
         $this->manager->findById(
             Argument::type('integer')
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($entity);
+    }
+
+    /**
+     * @param array $entity
+     */
+    protected function mockSearch(string $identifier, string $search, $entity): void
+    {
+        $this->manager->search(
+            Argument::is($identifier),
+            Argument::is($search)
         )
             ->shouldBeCalledOnce()
             ->willReturn($entity);
@@ -62,13 +85,43 @@ class AbstractHandlerTest extends AbstractTest
     }
 
     /**
-     * @param int $id
-     * @param StorableEntityInterface $entity
+     * @param array $entity
      */
-    protected function mockRetrieveEntityById(int $id, StorableEntityInterface $entity): void
+    protected function mockRetrieveEntityArray(array $entity): void
+    {
+        $this->manager->findById(
+            Argument::type('integer')
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($entity);
+    }
+
+    /**
+     * @param  $id
+     * @param StorableEntityInterface|array $entity
+     */
+    protected function mockRetrieveEntityById(int $id, $entity): void
     {
         $this->manager->findById(
             Argument::is($id)
+        )
+            ->shouldBeCalledOnce()
+            ->willReturn($entity);
+    }
+
+    /**
+     * @param string $className
+     * @param array $dataFormatted
+     * @param StorableEntityInterface $entity
+     */
+    protected function mockRetrieveEntityDenormalized(
+        string $className,
+        array $dataFormatted,
+        StorableEntityInterface $entity
+    ): void {
+        $this->serializer->denormalize(
+            Argument::is($dataFormatted),
+            Argument::is($className)
         )
             ->shouldBeCalledOnce()
             ->willReturn($entity);

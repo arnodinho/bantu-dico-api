@@ -61,7 +61,7 @@ class UnknownHandler extends AbstractHandler implements HandlerInterface
 
     public function deleteById(int $id)
     {
-        if ($entity = $this->unknownManager->findById($id)) {
+        if ($entity = $this->retrieveById($id)) {
             $this->unknownManager->delete($entity);
         }
     }

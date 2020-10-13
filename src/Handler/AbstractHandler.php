@@ -41,8 +41,6 @@ class AbstractHandler
     /**
      * Check if word exists in french dictionary.
      *
-     * @param string $word
-     * @return bool
      * @throws GuzzleException
      */
     public function isWordValid(string $word): bool
@@ -52,8 +50,8 @@ class AbstractHandler
                 'query' => [
                     'key' => $_ENV['YANDEX_API_KEY'],
                     'lang' => 'fr-fr',
-                    'text' => $word
-                ]
+                    'text' => $word,
+                ],
             ]);
 
         if (Response::HTTP_OK !== $response->getStatusCode()) {
