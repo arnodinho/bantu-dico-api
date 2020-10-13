@@ -10,6 +10,7 @@ namespace App\Tests\Manager;
 
 use App\Entity\Page;
 use App\Manager\PageManager;
+use App\Repository\PageRepository;
 use App\Tests\AbstractManagerTest;
 use Doctrine\Persistence\ObjectRepository;
 use Prophecy\Argument;
@@ -24,7 +25,7 @@ class PageManagerTest extends AbstractManagerTest
     protected function setUp(): void
     {
         parent::setUp();
-
+        $this->repository = $this->prophesize(PageRepository::class);
         $this->mockRepository(Page::class);
         $this->pageManager = new PageManager($this->em->reveal());
     }
