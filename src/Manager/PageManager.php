@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Manager;
 
+use App\Cache\RedisCache;
 use App\Entity\Page;
 use App\Entity\StorableEntityInterface;
 use App\Repository\PageRepository;
@@ -28,17 +29,28 @@ class PageManager extends AbstractManager implements ManagerInterface
     protected $repository;
 
     /**
-     * PageManager constructor.
+     * @var RedisCache
      */
-    public function __construct(EntityManagerInterface $em)
+    protected $redis;
+
+
+    /**
+     * PageManager constructor.
+     *
+     * @param EntityManagerInterface $em
+     * @param RedisCache $redis
+     */
+    public function __construct(EntityManagerInterface $em, RedisCache $redis)
     {
         parent::__construct($em);
 
+        $this->redis = $redis;
         $this->repository = $this->getEntityManager()->getRepository(Page::class);
     }
 
     /**
-     * @return StorableEntityInterface|bool
+     * @param int $id
+     * @return StorableEntityInterface|bool|null
      */
     public function findById(int $id)
     {

@@ -8,12 +8,13 @@
 
 namespace App\Tests\Manager;
 
+use App\Cache\RedisCache;
 use App\Entity\Page;
 use App\Manager\PageManager;
 use App\Repository\PageRepository;
 use App\Tests\AbstractManagerTest;
-use Doctrine\Persistence\ObjectRepository;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 
 class PageManagerTest extends AbstractManagerTest
 {
@@ -22,17 +23,30 @@ class PageManagerTest extends AbstractManagerTest
      */
     protected $pageManager;
 
+
+    /**
+     * @var ObjectProphecy
+     */
+    protected $redis;
     protected function setUp(): void
     {
         parent::setUp();
         $this->repository = $this->prophesize(PageRepository::class);
+        $this->redis = $this->prophesize(RedisCache::class);
         $this->mockRepository(Page::class);
-        $this->pageManager = new PageManager($this->em->reveal());
+
+        $this->pageManager = new PageManager($this->em->reveal(), $this->redis->reveal());
     }
 
     public function testFindById(): void
     {
-        $this->mockFindById($this->pageModel);
+        $this->mockFindByIdWithRedis($this->pageModel->getId());
+        $this->mockFindById($this->pageModel->getId(), $this->pageModel);
+        $this->mockRedisSetData(
+            $this->pageModel->getId(),
+            $this->pageModel,
+            PageManager::REDIS_PAGE_NAMESPACE
+        );
         $this->assertEquals(
             $this->pageModel,
             $this->pageManager->findById($this->pageModel->getId())
@@ -70,5 +84,20 @@ class PageManagerTest extends AbstractManagerTest
         $this->assertNull(
             $this->pageManager->delete($this->pageModel)
         );
+    }
+
+    public function pageProvider(): array
+    {
+        return [
+            [
+                (new Page())->setId(6)
+                ->setTitle('title page - 5')
+                ->setLanguage('French')
+                ->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor')
+                ->setCreatedAt(new \DateTime('2020-04-15 10:11:28'))
+                ->setUpdatedAt(new \DateTime('2020-04-15 10:11:28'))
+            ],
+            [null]
+        ];
     }
 }
