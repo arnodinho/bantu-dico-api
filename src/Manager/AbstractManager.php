@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace App\Manager;
 
-use App\Cache\RedisCache;
 use App\Entity\StorableEntityInterface;
 use App\Handler\ElasticHandler;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,11 +26,6 @@ class AbstractManager
     protected $em;
 
     /**
-     * @var RedisCache
-     */
-    protected $redis;
-
-    /**
      * @var Index
      */
     protected $finder;
@@ -40,11 +34,11 @@ class AbstractManager
 
     /**
      * AbstractServiceManager constructor.
+     * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->redis = RedisCache::getInstance();
     }
 
     protected function getEntityManager(): EntityManagerInterface

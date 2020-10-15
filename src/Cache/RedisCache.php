@@ -24,7 +24,6 @@ class RedisCache
     /**
      * Singleton.
      *
-     * @param Client $client
      * @return RedisCache
      */
     public static function getInstance()
@@ -38,9 +37,8 @@ class RedisCache
 
     /**
      * constructor.
-     *
      */
-    private function __construct()
+    public function __construct()
     {
         $this->client = new Client();
         $this->client->connect($_ENV["REDIS_HOST"]);
