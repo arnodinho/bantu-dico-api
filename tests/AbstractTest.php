@@ -29,7 +29,7 @@ class AbstractTest extends TestCase
     /**
      * @var Page|ObjectProphecy
      */
-    protected $pageModel;
+    protected   $pageModel;
 
     /**
      * @var Unknown|ObjectProphecy
@@ -56,12 +56,12 @@ class AbstractTest extends TestCase
         $this->em = $this->prophesize(EntityManagerInterface::class);
 
         $this->pageModel = (new Page())
-            ->setId(5)
-            ->setTitle('title Mock Pock')
-            ->setLanguage('FR')
-            ->setContent('atzsjsd sukdgskudhqs skdh sdfksdh  sdifhsd')
-            ->setCreatedAt(new \DateTime('now'))
-            ->setUpdatedAt(new \DateTime('now'));
+            ->setId(6)
+            ->setTitle('title page - 5')
+            ->setLanguage('French')
+            ->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor')
+            ->setCreatedAt(new \DateTime('2020-04-15 10:11:28'))
+            ->setUpdatedAt(new \DateTime('2020-04-15 10:11:28'));
 
         $this->unknownModel = (new Unknown())
             ->setId(5)
