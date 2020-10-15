@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Page;
+use App\Entity\StorableEntityInterface;
 use App\Form\PageType;
 use App\Handler\PageHandler;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -41,8 +42,9 @@ class PageController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK)
+     * @return StorableEntityInterface|null
      */
-    public function getPageAction(int $id, PageHandler $pageHandler): ?Page
+    public function getPageAction(int $id, PageHandler $pageHandler): ?StorableEntityInterface
     {
         return $pageHandler->retrieveById($id);
     }

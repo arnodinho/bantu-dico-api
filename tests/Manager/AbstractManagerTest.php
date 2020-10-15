@@ -10,8 +10,8 @@ namespace App\Tests;
 
 use App\Entity\StorableEntityInterface;
 use App\Handler\ElasticHandler;
+use App\Manager\PageManager;
 use App\Repository\PageRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use FOS\ElasticaBundle\Elastica\Index;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -21,11 +21,11 @@ use Prophecy\Prophecy\ObjectProphecy;
  */
 class AbstractManagerTest extends AbstractTest
 {
-
     /**
      * @var ObjectProphecy
      */
     protected $indexElasticSearch;
+
     /**
      * @var PageRepository
      */
@@ -34,6 +34,7 @@ class AbstractManagerTest extends AbstractTest
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->indexElasticSearch = $this->prophesize(Index::class)->reveal();
     }
 
@@ -47,13 +48,33 @@ class AbstractManagerTest extends AbstractTest
         )->willReturn($this->repository);
     }
 
-    protected function mockFindById($model): void
+    protected function mockFindById(int $id, StorableEntityInterface $model): void
     {
         $this->repository->find(
-            Argument::is($model->getId())
+            Argument::is($id)
         )
             ->shouldBeCalledOnce()
             ->willReturn($model);
+    }
+
+    protected function mockFindByIdWithRedis(int $id, $model = null): void
+    {
+        $this->redis->get(
+            Argument::is($id),
+            Argument::is(PageManager::REDIS_PAGE_NAMESPACE)
+        )
+            ->shouldBeCalled()
+            ->willReturn($model);
+    }
+
+    public function mockRedisSetData(int $id, StorableEntityInterface $entity, string $namespace): void
+    {
+        $this->redis->set(
+            Argument::is($id),
+            Argument::is($entity),
+            Argument::is($namespace)
+        )
+            ->shouldBeCalledOnce();
     }
 
     protected function mockFindAll($modelTab): void
