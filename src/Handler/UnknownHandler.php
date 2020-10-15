@@ -13,6 +13,8 @@ namespace App\Handler;
 use App\Entity\Unknown;
 use App\Entity\StorableEntityInterface;
 use App\Manager\UnknownManager;
+use App\Serializer\SerializerHandler;
+use GuzzleHttp\Client;
 
 /**
  * Class UnknownHandler.
@@ -27,10 +29,15 @@ class UnknownHandler extends AbstractHandler implements HandlerInterface
     /**
      * UnknownHandler constructor.
      * @param UnknownManager $unknownManager
+     * @param SerializerHandler $serializerHandler
+     * @param Client $client
      */
-    public function __construct(UnknownManager $unknownManager)
-    {
-        parent::__construct();
+    public function __construct(
+        UnknownManager $unknownManager,
+        SerializerHandler $serializerHandler,
+        Client $client
+    ) {
+        parent::__construct($serializerHandler, $client);
         $this->unknownManager = $unknownManager;
     }
 

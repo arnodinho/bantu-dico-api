@@ -34,7 +34,6 @@ class AbstractManager
 
     /**
      * AbstractServiceManager constructor.
-     * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
     {

@@ -12,7 +12,10 @@ use App\Entity\StorableEntityInterface;
 use App\Serializer\SerializerHandler;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use GuzzleHttp\Client;
 
 /**
  * Class AbstractHandlerTest.
@@ -31,11 +34,17 @@ class AbstractHandlerTest extends AbstractTest
      */
     protected $serializer;
 
+    /**
+     * @var ObjectProphecy
+     */
+    protected $client;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->serializer = $this->prophesize(Serializer::class);
         $this->serializerHandler = $this->prophesize(SerializerHandler::class);
+        $this->client = $this->prophesize(Client::class);
     }
 
     /**
@@ -51,9 +60,11 @@ class AbstractHandlerTest extends AbstractTest
     }
 
     /**
-     * @param array $entity
+     * @param string $identifier
+     * @param $search
+     * @param $entity
      */
-    protected function mockSearch(string $identifier, string $search, $entity): void
+    protected function mockSearch(string $identifier, $search, $entity): void
     {
         $this->manager->search(
             Argument::is($identifier),
@@ -61,6 +72,16 @@ class AbstractHandlerTest extends AbstractTest
         )
             ->shouldBeCalledOnce()
             ->willReturn($entity);
+    }
+
+    protected function mockGetSerializer()
+    {
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+
+        $this->serializerHandler->getSerializer()
+            ->shouldBeCalledOnce()
+            ->willReturn(new Serializer($normalizers, $encoders));
     }
 
     /**

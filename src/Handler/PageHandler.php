@@ -13,6 +13,8 @@ namespace App\Handler;
 use App\Entity\Page;
 use App\Entity\StorableEntityInterface;
 use App\Manager\PageManager;
+use App\Serializer\SerializerHandler;
+use GuzzleHttp\Client;
 
 /**
  * Class PageHandler.
@@ -27,16 +29,21 @@ class PageHandler extends AbstractHandler implements HandlerInterface
     /**
      * PageHandler constructor.
      * @param PageManager $pageManager
+     * @param SerializerHandler $serializerHandler
+     * @param Client $client
      */
-    public function __construct(PageManager $pageManager)
-    {
-        parent::__construct();
+    public function __construct(
+        PageManager $pageManager,
+        SerializerHandler $serializerHandler,
+        Client $client
+    ) {
+        parent::__construct($serializerHandler, $client);
         $this->pageManager = $pageManager;
     }
 
     /**
      * @param int $id
-     * @return Page|null
+     * @return StorableEntityInterface|bool
      */
     public function retrieveById(int $id)
     {

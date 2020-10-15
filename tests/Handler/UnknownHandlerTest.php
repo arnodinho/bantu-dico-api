@@ -29,7 +29,9 @@ class UnknownHandlerTest extends AbstractHandlerTest
 
         $this->manager = $this->prophesize(UnknownManager::class);
         $this->unknownHandler  = new UnknownHandler(
-            $this->manager->reveal()
+            $this->manager->reveal(),
+            $this->serializerHandler->reveal(),
+            $this->client->reveal()
         );
     }
 

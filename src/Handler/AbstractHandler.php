@@ -32,10 +32,10 @@ class AbstractHandler
      */
     protected $client;
 
-    public function __construct()
+    public function __construct(SerializerHandler $serializerHandler, Client $client)
     {
-        $this->serializerHandler = new SerializerHandler();
-        $this->client = new Client();
+        $this->serializerHandler = $serializerHandler;
+        $this->client = $client;
     }
 
     /**

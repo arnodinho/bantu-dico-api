@@ -29,7 +29,7 @@ class AbstractTest extends TestCase
     /**
      * @var Page|ObjectProphecy
      */
-    protected   $pageModel;
+    protected $pageModel;
 
     /**
      * @var Unknown|ObjectProphecy

@@ -33,12 +33,8 @@ class PageManager extends AbstractManager implements ManagerInterface
      */
     protected $redis;
 
-
     /**
      * PageManager constructor.
-     *
-     * @param EntityManagerInterface $em
-     * @param RedisCache $redis
      */
     public function __construct(EntityManagerInterface $em, RedisCache $redis)
     {
@@ -49,7 +45,6 @@ class PageManager extends AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param int $id
      * @return StorableEntityInterface|bool|null
      */
     public function findById(int $id)

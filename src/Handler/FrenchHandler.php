@@ -13,7 +13,9 @@ namespace App\Handler;
 use App\Entity\French;
 use App\Entity\StorableEntityInterface;
 use App\Manager\FrenchManager;
+use GuzzleHttp\Client;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use App\Serializer\SerializerHandler;
 
 /**
  * Class FrenchHandler.
@@ -27,11 +29,18 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
 
     /**
      * FrenchHandler constructor.
+     *
      * @param FrenchManager $frenchManager
+     * @param SerializerHandler $serializerHandler
+     * @param Client $client
      */
-    public function __construct(FrenchManager $frenchManager)
-    {
-        parent::__construct();
+    public function __construct(
+        FrenchManager $frenchManager,
+        SerializerHandler $serializerHandler,
+        Client $client
+    ) {
+        parent::__construct($serializerHandler, $client);
+
         $this->frenchManager = $frenchManager;
     }
 

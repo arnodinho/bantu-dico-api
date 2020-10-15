@@ -42,7 +42,6 @@ class PageController extends BaseController
      * )
      *
      * @Rest\View(statusCode=Response::HTTP_OK)
-     * @return StorableEntityInterface|null
      */
     public function getPageAction(int $id, PageHandler $pageHandler): ?StorableEntityInterface
     {

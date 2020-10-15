@@ -30,7 +30,9 @@ class PageHandlerTest extends AbstractHandlerTest
 
         $this->manager = $this->prophesize(PageManager::class);
         $this->pageHandler  = new PageHandler(
-            $this->manager->reveal()
+            $this->manager->reveal(),
+            $this->serializerHandler->reveal(),
+            $this->client->reveal()
         );
     }
 

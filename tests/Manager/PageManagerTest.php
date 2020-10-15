@@ -54,7 +54,7 @@ class PageManagerTest extends AbstractManagerTest
                 PageManager::REDIS_PAGE_NAMESPACE
             );
         }
-        
+
         $this->assertEquals(
             $this->pageModel,
             $this->pageManager->findById($this->pageModel->getId())
