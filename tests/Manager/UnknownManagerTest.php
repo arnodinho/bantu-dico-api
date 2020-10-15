@@ -32,7 +32,7 @@ class UnknownManagerTest extends AbstractManagerTest
 
     public function testFindById(): void
     {
-        $this->mockFindById($this->unknownModel);
+        $this->mockFindById($this->unknownModel->getId(), $this->unknownModel);
         $this->assertEquals(
             $this->unknownModel,
             $this->unknownManager->findById($this->unknownModel->getId())

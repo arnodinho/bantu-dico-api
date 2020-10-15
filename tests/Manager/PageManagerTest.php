@@ -38,15 +38,23 @@ class PageManagerTest extends AbstractManagerTest
         $this->pageManager = new PageManager($this->em->reveal(), $this->redis->reveal());
     }
 
-    public function testFindById(): void
+    /**
+     * @dataProvider pageProvider
+     * @param Page|null $page
+     */
+    public function testFindById(?Page $page): void
     {
-        $this->mockFindByIdWithRedis($this->pageModel->getId());
-        $this->mockFindById($this->pageModel->getId(), $this->pageModel);
-        $this->mockRedisSetData(
-            $this->pageModel->getId(),
-            $this->pageModel,
-            PageManager::REDIS_PAGE_NAMESPACE
-        );
+        $this->mockFindByIdWithRedis($this->pageModel->getId(), $page);
+
+        if (!$page) {
+            $this->mockFindById($this->pageModel->getId(), $this->pageModel);
+            $this->mockRedisSetData(
+                $this->pageModel->getId(),
+                $this->pageModel,
+                PageManager::REDIS_PAGE_NAMESPACE
+            );
+        }
+        
         $this->assertEquals(
             $this->pageModel,
             $this->pageManager->findById($this->pageModel->getId())
