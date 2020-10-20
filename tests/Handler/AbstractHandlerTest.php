@@ -106,12 +106,13 @@ class AbstractHandlerTest extends AbstractTest
     }
 
     /**
+     * @param int $id
      * @param array $entity
      */
-    protected function mockRetrieveEntityArray(array $entity): void
+    protected function mockRetrieveEntityBySearchId(int $id, array $entity): void
     {
-        $this->manager->findById(
-            Argument::type('integer')
+        $this->manager->search(
+            Argument::is($id)
         )
             ->shouldBeCalledOnce()
             ->willReturn($entity);
