@@ -17,4 +17,5 @@ return [
     FOS\RestBundle\FOSRestBundle::class => ['all' => true],
     Snc\RedisBundle\SncRedisBundle::class => ['all' => true],
     FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
+    Bruli\EventBusBundle\EventBusBundle::class => ['all' => true],
 ];
