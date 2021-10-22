@@ -50,10 +50,10 @@ RUN docker-php-ext-install -j$(nproc) opcache pdo_mysql
 ADD php.ini /usr/local/etc/php/conf.d/app.ini
 
 # add git config
-ADD gitconfig /root/.gitconfig
+#ADD gitconfig /root/.gitconfig
 
 # add ssh
-ADD ssh /root/.ssh
+#ADD ssh /root/.ssh
 
 #oh-my-git
 RUN git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.bashrc
