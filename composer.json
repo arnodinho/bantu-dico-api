@@ -7,11 +7,16 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-redis": "*",
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
+        "doctrine/orm": "^2.7",
         "doctrine/persistence": "^1.3",
-        "friendsofsymfony/elastica-bundle": "^5.1",
+        "friendsofsymfony/elastica-bundle": "^6.0",
         "friendsofsymfony/rest-bundle": "^2.7",
         "guzzlehttp/guzzle": "^7.0",
         "nelmio/api-doc-bundle": "^3.5",
+        "phpdocumentor/reflection-docblock": "^5.1",
         "predis/predis": "^1.0",
         "sensio/framework-extra-bundle": "^5.1",
         "snc/redis-bundle": "^3.2",
@@ -21,7 +26,7 @@
         "symfony/dependency-injection": "4.4.*",
         "symfony/dotenv": "4.4.*",
         "symfony/expression-language": "4.4.*",
-        "symfony/flex": "^1.3.1",
+        "symfony/flex": "^1.17",
         "symfony/form": "4.4.*",
         "symfony/framework-bundle": "4.4.*",
         "symfony/http-client": "4.4.*",
@@ -29,25 +34,29 @@
         "symfony/mailer": "4.4.*",
         "symfony/messenger": "4.4.*",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
         "symfony/process": "4.4.*",
         "symfony/property-access": "4.4.9",
+        "symfony/property-info": "4.4.*",
         "symfony/security-bundle": "4.4.*",
         "symfony/serializer": "4.4.*",
-        "symfony/serializer-pack": "*",
         "symfony/translation": "4.4.*",
-        "symfony/twig-pack": "^1.0",
+        "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "bruli/php-git-hooks": "^5.9",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
-        "symfony/debug-pack": "*",
+        "symfony/browser-kit": "4.4.*",
+        "symfony/css-selector": "4.4.*",
+        "symfony/debug-bundle": "4.4.*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*",
-        "symfony/test-pack": "^1.0"
+        "symfony/phpunit-bridge": "^5.1",
+        "symfony/stopwatch": "4.4.*",
+        "symfony/var-dumper": "4.4.*",
+        "symfony/web-profiler-bundle": "4.4.*"
     },
     "config": {
         "preferred-install": {
@@ -79,13 +88,13 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts",
-            "PhpGitHooks\\Infrastructure\\Composer\\ConfiguratorScript::buildConfig"
+            "@auto-scripts"
+
 
         ],
         "post-update-cmd": [
-            "@auto-scripts",
-            "PhpGitHooks\\Infrastructure\\Composer\\ConfiguratorScript::buildConfig"
+            "@auto-scripts"
+
         ]
     },
     "conflict": {
