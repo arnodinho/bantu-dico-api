@@ -16,7 +16,7 @@ use Exception;
  */
 class UserFixtures extends Fixture
 {
-    const ADMIN_USER_REFERENCE = 'admin-user';
+    public const ADMIN_USER_REFERENCE = 'admin-user';
 
     /**
      * @throws Exception

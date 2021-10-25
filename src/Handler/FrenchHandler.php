@@ -13,26 +13,19 @@ namespace App\Handler;
 use App\Entity\French;
 use App\Entity\StorableEntityInterface;
 use App\Manager\FrenchManager;
+use App\Serializer\SerializerHandler;
 use GuzzleHttp\Client;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use App\Serializer\SerializerHandler;
 
 /**
  * Class FrenchHandler.
  */
 class FrenchHandler extends AbstractHandler implements HandlerInterface
 {
-    /**
-     * @var FrenchManager
-     */
     protected FrenchManager $frenchManager;
 
     /**
      * FrenchHandler constructor.
-     *
-     * @param FrenchManager $frenchManager
-     * @param SerializerHandler $serializerHandler
-     * @param Client $client
      */
     public function __construct(
         FrenchManager $frenchManager,
@@ -45,8 +38,8 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
     }
 
     /**
-     * @param int $id
-     * @return French|null|mixed
+     * @return French|mixed|null
+     *
      * @throws ExceptionInterface
      */
     public function retrieveById(int $id)
@@ -59,24 +52,17 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
             );
     }
 
-    /**
-     * @return array|null
-     */
     public function retrieveAll(): ?array
     {
         return $this->frenchManager->findAll();
     }
 
-    /**
-     * @param StorableEntityInterface $entity
-     */
     public function create(StorableEntityInterface $entity): void
     {
         $this->frenchManager->save($entity);
     }
 
     /**
-     * @param int $id
      * @throws ExceptionInterface
      */
     public function deleteById(int $id)
@@ -86,15 +72,14 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
         }
     }
 
-    public function update(StorableEntityInterface $entity):void
+    public function update(StorableEntityInterface $entity): void
     {
         $this->frenchManager->save($entity);
     }
 
     /**
-     * @param string $identifier
-     * @param string $search
-     * @return French|null|mixed
+     * @return French|mixed|null
+     *
      * @throws ExceptionInterface
      */
     public function search(string $identifier, string $search): ?French

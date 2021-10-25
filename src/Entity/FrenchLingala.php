@@ -69,24 +69,17 @@ class FrenchLingala implements StorableEntityInterface
      */
     private $descriptionTarget;
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return French|null
-     */
     public function getFrench(): ?French
     {
         return $this->french;
     }
 
     /**
-     * @param French|null $french
      * @return $this
      */
     public function setFrench(?French $french): self
@@ -96,16 +89,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return Lingala|null
-     */
     public function getLingala(): ?Lingala
     {
         return $this->lingala;
     }
 
     /**
-     * @param Lingala|null $lingala
      * @return $this
      */
     public function setLingala(?Lingala $lingala): self
@@ -115,16 +104,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getStatus(): ?bool
     {
         return $this->status;
     }
 
     /**
-     * @param bool $status
      * @return $this
      */
     public function setStatus(bool $status): self
@@ -134,16 +119,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getVotes(): ?string
     {
         return $this->votes;
     }
 
     /**
-     * @param string|null $votes
      * @return $this
      */
     public function setVotes(?string $votes): self
@@ -153,16 +134,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLikes(): ?int
     {
         return $this->likes;
     }
 
     /**
-     * @param int|null $likes
      * @return $this
      */
     public function setLikes(?int $likes): self
@@ -172,16 +149,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
     /**
-     * @param User|null $user
      * @return $this
      */
     public function setUser(?User $user): self
@@ -191,16 +164,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
     /**
-     * @param DateTimeInterface $createdAt
      * @return $this
      */
     public function setCreatedAt(DateTimeInterface $createdAt): self
@@ -210,16 +179,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeInterface $updatedAt
      * @return $this
      */
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
@@ -229,9 +194,6 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescriptionSource(): ?string
     {
         return $this->descriptionSource;
@@ -244,16 +206,12 @@ class FrenchLingala implements StorableEntityInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescriptionTarget(): ?string
     {
         return $this->descriptionTarget;
     }
 
     /**
-     * @param string|null $descriptionTarget
      * @return $this
      */
     public function setDescriptionTarget(?string $descriptionTarget): self

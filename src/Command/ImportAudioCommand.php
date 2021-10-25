@@ -22,9 +22,6 @@ class ImportAudioCommand extends Command
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'audio:import';
 
-    /**
-     * @var AudioHandler
-     */
     private AudioHandler $audioHandler;
 
     public function __construct(AudioHandler $audioHandler)
@@ -48,12 +45,12 @@ class ImportAudioCommand extends Command
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $begin = intval($input->getArgument('begin'));
-        $end   = !empty($input->getArgument('end'))? intval($input->getArgument('end')): null;
+        $end = !empty($input->getArgument('end')) ? intval($input->getArgument('end')) : null;
 
         if (isset($end) && $end < $begin) {
             return $output->writeln('le deuxieme argument doit etre superieur au premier');

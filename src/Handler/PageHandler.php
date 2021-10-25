@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Entity\Page;
 use App\Entity\StorableEntityInterface;
 use App\Manager\PageManager;
 use App\Serializer\SerializerHandler;
@@ -21,16 +20,10 @@ use GuzzleHttp\Client;
  */
 class PageHandler extends AbstractHandler implements HandlerInterface
 {
-    /**
-     * @var PageManager
-     */
     protected PageManager $pageManager;
 
     /**
      * PageHandler constructor.
-     * @param PageManager $pageManager
-     * @param SerializerHandler $serializerHandler
-     * @param Client $client
      */
     public function __construct(
         PageManager $pageManager,
@@ -42,7 +35,6 @@ class PageHandler extends AbstractHandler implements HandlerInterface
     }
 
     /**
-     * @param int $id
      * @return StorableEntityInterface|bool
      */
     public function retrieveById(int $id)
@@ -50,17 +42,11 @@ class PageHandler extends AbstractHandler implements HandlerInterface
         return $this->pageManager->findById($id);
     }
 
-    /**
-     * @return array|null
-     */
     public function retrieveAll(): ?array
     {
         return $this->pageManager->findAll();
     }
 
-    /**
-     * @param StorableEntityInterface $entity
-     */
     public function create(StorableEntityInterface $entity): void
     {
         $this->pageManager->save($entity);
@@ -73,7 +59,7 @@ class PageHandler extends AbstractHandler implements HandlerInterface
         }
     }
 
-    public function update(StorableEntityInterface $entity):void
+    public function update(StorableEntityInterface $entity): void
     {
         $this->pageManager->save($entity);
     }

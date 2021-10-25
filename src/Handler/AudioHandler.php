@@ -42,6 +42,6 @@ class AudioHandler
             $this->bus->dispatch(new WordNotification($id));
         }
 
-        return  self::IMPORT_SUCCES;
+        return self::IMPORT_SUCCES;
     }
 }

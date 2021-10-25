@@ -42,8 +42,6 @@ class User implements UserInterface, StorableEntityInterface
     private string $firstname;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="lastname", type="string", nullable=true)
      */
     private string $lastname;
@@ -53,9 +51,6 @@ class User implements UserInterface, StorableEntityInterface
      */
     private string $gender;
 
-    /**
-     * @var string
-     */
     protected string $username;
 
     /**
@@ -67,8 +62,6 @@ class User implements UserInterface, StorableEntityInterface
      * @ORM\OneToMany(targetEntity="App\Entity\FrenchLingala", mappedBy="user")
      */
     private $frenchLingalas;
-
-
 
     public function __construct()
     {
@@ -154,57 +147,39 @@ class User implements UserInterface, StorableEntityInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return string
-     */
     public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    /**
-     * @param string $firstname
-     * @return User
-     */
     public function setFirstname(string $firstname): User
     {
         $this->firstname = $firstname;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    /**
-     * @param string $lastname
-     * @return User
-     */
     public function setLastname(string $lastname): User
     {
         $this->lastname = $lastname;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getGender(): string
     {
         return $this->gender;
     }
 
-    /**
-     * @param string $gender
-     * @return User
-     */
     public function setGender(string $gender): User
     {
         $this->gender = $gender;
+
         return $this;
     }
 

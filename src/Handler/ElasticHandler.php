@@ -17,10 +17,10 @@ use FOS\ElasticaBundle\Elastica\Client;
  */
 class ElasticHandler
 {
-    const INDEX_FRENCH = 'french';
-    const INDEX_SANGO = 'sango';
-    const INDEX_LINGALA = 'lingala';
-    const INDEX_FRENCH_SANGO = 'french_sango';
+    public const INDEX_FRENCH = 'french';
+    public const INDEX_SANGO = 'sango';
+    public const INDEX_LINGALA = 'lingala';
+    public const INDEX_FRENCH_SANGO = 'french_sango';
 
     /**
      * @var Client
@@ -86,8 +86,7 @@ class ElasticHandler
         //remove nullable value in array for denormalisation process
         $result = array_filter($data, function ($value) {
             return !empty($value);
-        } );
-
+        });
 
         return $result;
     }

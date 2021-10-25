@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Entity\Unknown;
 use App\Entity\StorableEntityInterface;
+use App\Entity\Unknown;
 use App\Manager\UnknownManager;
 use App\Serializer\SerializerHandler;
 use GuzzleHttp\Client;
@@ -21,16 +21,10 @@ use GuzzleHttp\Client;
  */
 class UnknownHandler extends AbstractHandler implements HandlerInterface
 {
-    /**
-     * @var UnknownManager
-     */
     protected UnknownManager $unknownManager;
 
     /**
      * UnknownHandler constructor.
-     * @param UnknownManager $unknownManager
-     * @param SerializerHandler $serializerHandler
-     * @param Client $client
      */
     public function __construct(
         UnknownManager $unknownManager,
@@ -42,7 +36,6 @@ class UnknownHandler extends AbstractHandler implements HandlerInterface
     }
 
     /**
-     * @param int $id
      * @return Unknown|null
      */
     public function retrieveById(int $id)
@@ -50,17 +43,11 @@ class UnknownHandler extends AbstractHandler implements HandlerInterface
         return $this->unknownManager->findById($id);
     }
 
-    /**
-     * @return array|null
-     */
     public function retrieveAll(): ?array
     {
         return $this->unknownManager->findAll();
     }
 
-    /**
-     * @param StorableEntityInterface $entity
-     */
     public function create(StorableEntityInterface $entity): void
     {
         $this->unknownManager->save($entity);
