@@ -83,6 +83,12 @@ class ElasticHandler
             $data['updated_at'] = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['updated_at']);
         }
 
-        return $data;
+        //remove nullable value in array for denormalisation process
+        $result = array_filter($data, function ($value) {
+            return !empty($value);
+        } );
+
+
+        return $result;
     }
 }
