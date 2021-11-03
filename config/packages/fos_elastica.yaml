@@ -1,7 +1,7 @@
 # Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
 fos_elastica:
     clients:
-        default: { host: elasticsearch, port: 9200 } #you need to set the host to the elasticsearch docker container not localhost|127.0.0.1
+        default: { host: 127.0.0.1, port: 9200 } #you need to set the host to the elasticsearch docker container not localhost|127.0.0.1
     indexes:
         app:
             index_name: french
