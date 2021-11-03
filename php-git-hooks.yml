@@ -33,7 +33,7 @@ pre-commit:
         right-message: 'HEY ARNODINHO, BEAU GOOOOOOSSE!!'
         error-message: 'FIX YOUR FUCKING CODE I DON''T GIVE A FUCK!!'
 commit-msg:
-    enabled: true
+    enabled: false
     regular-expression: '^\[(T\d|BANTU)-\d+\]\s.+$'
 pre-push:
     enabled: false
