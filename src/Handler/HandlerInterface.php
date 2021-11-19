@@ -17,7 +17,7 @@ interface HandlerInterface
      */
     public function retrieveById(int $id);
 
-    public function deleteById(int $id);
+    public function delete(StorableEntityInterface $entity);
 
     public function retrieveAll(): ?array;
 

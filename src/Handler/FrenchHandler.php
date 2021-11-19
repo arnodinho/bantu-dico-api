@@ -57,19 +57,14 @@ class FrenchHandler extends AbstractHandler implements HandlerInterface
         return $this->frenchManager->findAll();
     }
 
-    public function create(StorableEntityInterface $entity): void
+    public function create(StorableEntityInterface $french): void
     {
-        $this->frenchManager->save($entity);
+        $this->frenchManager->save($french);
     }
-
-    /**
-     * @throws ExceptionInterface
-     */
-    public function deleteById(int $id)
+    
+    public function delete(StorableEntityInterface $french)
     {
-        if ($entity = $this->retrieveById($id)) {
-            $this->frenchManager->delete($entity);
-        }
+        $this->frenchManager->delete($french);
     }
 
     public function update(StorableEntityInterface $entity): void
