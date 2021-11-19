@@ -18,7 +18,7 @@ use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
 use GuzzleHttp\Exception\GuzzleException;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
@@ -32,12 +32,11 @@ class FrenchController extends BaseController
 
     /**
      * @Route("/french/{id}", methods={"GET"})
-     * @SWG\Get(
+     * @OA\Get(
      *   tags={"French"},
      *   summary="Get French By it's Id.",
      *   description="This section retrive a french by it's id given in url path",
-     *   produces={"application/json"},
-     *   @SWG\Response(
+     *   @OA\Response(
      *     response=Response::HTTP_CREATED,
      *     description="successful operation",
      *     @Model(type=French::class)
@@ -55,17 +54,16 @@ class FrenchController extends BaseController
 
     /**
      * @Route("/frenchs", methods={"GET"})
-     * @SWG\Get(
+     * @OA\Get(
      *   tags={"French"},
      *   summary="Retrieve all frenchs in database",
      *   description="This section retrieve all frenchs in database",
-     *   produces={"application/json"},
-     *   @SWG\Response(
+     *   @OA\Response(
      *     response=200,
      *     description="successful operation",
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="array",
-     *             @SWG\Items(ref=@Model(type=French::class)
+     *             @OA\Items(ref=@Model(type=French::class)
      * )
      *         ),
      *   )
@@ -81,80 +79,78 @@ class FrenchController extends BaseController
 
     /**
      * @Route("/french", methods={"POST"})
-     * @SWG\Post(
+     * @OA\Post(
      *   tags={"French"},
      *   summary="French Word creation",
      *   description="French creation",
-     *   consumes={"application/json"},
-     *   produces={"application/json"},
-     *   @SWG\Parameter(
-     *     in="body",
-     *     name="body",
-     *     description="French word creation",
-     *     required=true,
-     *     @SWG\Schema(
-     *              @SWG\Property(
-     *                  property="word",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Description",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Exemple",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Url",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Type",
-     *                  type="string",
-     *                  enum={
-     *                      "nom",
-     *                      "Pronom",
-     *                      "adjectif",
-     *                      "verbe",
-     *                      "préposition",
-     *                      "conjonction",
-     *                      "Adjectif numéral",
-     *                      "Adjectif"
-     *                  }
-     *              ),
-     *              @SWG\Property(
-     *                  property="Language",
-     *                  type="string",
-     *                  enum={
-     *                      "French",
-     *                      "Sango",
-     *                      "Lingala",
-     *                  }
-     *              ),
-     *              @SWG\Property(
-     *                  property="Status",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="checkValidity",
-     *                  type="boolean"
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                    @OA\Property(
+     *                     property="word",
+     *                     type="string",
+     *                     maximum=255
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string",
+     *                     maximum=255
+     *                 ),
+     *                 @OA\Property(
+     *                     property="exemple",
+     *                     type="string",
+     *                     maximum=255
+     *                 ),
+     *                 @OA\Property(
+     *                     property="url",
+     *                     type="string",
+     *                     maximum=255
+     *                 ),
+     *                 @OA\Property(
+     *                     property="type",
+     *                     type="string",
+     *                     enum={
+     *                         "nom",
+     *                         "Pronom",
+     *                         "adjectif",
+     *                         "verbe",
+     *                         "préposition",
+     *                         "conjonction",
+     *                         "Adjectif numéral",
+     *                         "Adjectif"
+     *                     }
+     *                 ),
+     *                 @OA\Property(
+     *                     property="language",
+     *                     type="string",
+     *                     enum={
+     *                         "French",
+     *                         "Sango",
+     *                         "Lingala",
+     *                     }
+     *                 ),
+     *                 @OA\Property(
+     *                     property="status",
+     *                     type="boolean"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="checkValidity",
+     *                     type="boolean"
+     *                 )
      *              )
+     *          )
      *     )
      *   ),
-     *   @SWG\Response(
+     *   @OA\Response(
      *     response=Response::HTTP_CREATED,
      *     description=BaseController::MESG_SUCCESSFULL_OPERATION
      *   ),
-     *   @SWG\Response(
+     *   @OA\Response(
      *     response=Response::HTTP_INTERNAL_SERVER_ERROR,
      *     description=FrenchController::INVALID_WORD
      *   ),
-     *   @SWG\Response(response=Response::HTTP_BAD_REQUEST, description="Bad Request")
+     *   @OA\Response(response=Response::HTTP_BAD_REQUEST, description="Bad Request")
      * )
      *
      * @return View
@@ -165,13 +161,9 @@ class FrenchController extends BaseController
     {
         $french = new French();
         $payload = $request->request->all();
-        $checkValidity = false;
-
-        if (!empty($payload['checkValidity'])) {
-            $checkValidity = $payload['checkValidity'];
-            unset($payload['checkValidity']);
-        }
-
+        $checkValidity = !empty($payload['checkValidity']) ? $payload['checkValidity']: false;
+        unset($payload['checkValidity']);
+        
         $form = $this->createForm(FrenchType::class, $french);
         $form->submit($payload);
 
@@ -193,29 +185,26 @@ class FrenchController extends BaseController
 
     /**
      * @Route("/french/search", methods={"POST"})
-     * @SWG\Post(
+     * @OA\Post(
      *   tags={"French"},
      *   summary="search french by word or id",
      *   description="search french word or id",
-     *   consumes={"application/json"},
-     *   @SWG\Parameter(
-     *     in="body",
-     *     name="body",
-     *     description="search french by word or id",
-     *     required=true,
-     *          @SWG\Schema(
-     *              @SWG\Property(
-     *                  property="identifier",
-     *                  type="string",
-     *                  maximum=64
-     *              ),
-     *              @SWG\Property(
-     *                  property="search",
-     *                  type="string"
-     *              )
-     *          )
-     *   ),
-     *   @SWG\Response(
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="identifier",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="search",
+     *                     type="string"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *   @OA\Response(
      *     response=Response::HTTP_OK,
      *     description=BaseController::MESG_SUCCESSFULL_OPERATION,
      *     @Model(type=French::class)
@@ -236,12 +225,11 @@ class FrenchController extends BaseController
 
     /**
      * @Route("/french/{id}", methods={"DELETE"}, requirements={"id": "\d+"})
-     * @SWG\Delete(
+     * @OA\Delete(
      *   tags={"French"},
      *   summary="Delete French By it's Id.",
      *   description="This section delete a french by it's id given in url path",
-     *   produces={"application/json"},
-     *   @SWG\Response(
+     *   @OA\Response(
      *     response=Response::HTTP_NO_CONTENT,
      *     description="successful operation"
      *   )
@@ -249,75 +237,73 @@ class FrenchController extends BaseController
      *
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      */
-    public function deleteFrenchAction(int $id, FrenchHandler $frenchHandler): void
+    public function deleteFrenchAction(French $french, FrenchHandler $frenchHandler): void
     {
-        $frenchHandler->deleteById($id);
+        $frenchHandler->delete($french);
     }
 
     /**
      * @Route("/french/{id}", methods={"PUT"}, requirements={"id": "\d+"})
-     * @SWG\Put(
+     * @OA\Put(
      *   tags={"French"},
      *   summary="French update",
      *   description="French update french by it's id",
-     *   consumes={"application/json"},
-     *   produces={"application/json"},
-     *   @SWG\Parameter(
-     *     in="body",
-     *     name="body",
-     *     description="french body",
-     *     required=true,
-     *     @SWG\Schema(
-     *              @SWG\Property(
-     *                  property="word",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Description",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Exemple",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Url",
-     *                  type="string",
-     *                  maximum=255
-     *              ),
-     *              @SWG\Property(
-     *                  property="Type",
-     *                  type="string",
-     *                  enum={
-     *                      "nom",
-     *                      "Pronom",
-     *                      "adjectif",
-     *                      "verbe",
-     *                      "préposition",
-     *                      "conjonction",
-     *                      "Adjectif numéral",
-     *                      "Adjectif"
-     *                  }
-     *              ),
-     *              @SWG\Property(
-     *                  property="Language",
-     *                  type="string",
-     *                  enum={
-     *                      "French",
-     *                      "Sango",
-     *                      "Lingala",
-     *                  }
-     *              ),
-     *              @SWG\Property(
-     *                  property="Status",
-     *                  type="boolean"
-     *              )
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                    @OA\Property(
+     *                         property="word",
+     *                         type="string",
+     *                         maximum=255
+     *                     ),
+     *                    @OA\Property(
+     *                         property="description",
+     *                         type="string",
+     *                         maximum=255
+     *                     ),
+     *                    @OA\Property(
+     *                         property="exemple",
+     *                         type="string",
+     *                         maximum=255
+     *                     ),
+     *                    @OA\Property(
+     *                         property="url",
+     *                         type="string",
+     *                         maximum=255
+     *                     ),
+     *                    @OA\Property(
+     *                         property="type",
+     *                         type="string",
+     *                         enum={
+     *                             "nom",
+     *                             "Pronom",
+     *                             "adjectif",
+     *                             "verbe",
+     *                             "préposition",
+     *                             "conjonction",
+     *                             "Adjectif numéral",
+     *                             "Adjectif"
+     *                         }
+     *                     ),
+     *                    @OA\Property(
+     *                         property="language",
+     *                         type="string",
+     *                         enum={
+     *                             "French",
+     *                             "Sango",
+     *                             "Lingala",
+     *                         }
+     *                     ),
+     *                    @OA\Property(
+     *                         property="Status",
+     *                         type="boolean"
+     *                     )
+     *                  )
+     *            )
      *     )
      *   ),
-     *   @SWG\Response(
+     *  @OA\Response(
      *     response=Response::HTTP_NO_CONTENT,
      *     description="successful operation"
      *   )
@@ -326,11 +312,10 @@ class FrenchController extends BaseController
      *
      * @throws ExceptionInterface
      */
-    public function putFrenchAction(int $id, Request $request, FrenchHandler $frenchHandler): void
+    public function putFrenchAction(Request $request, FrenchHandler $frenchHandler, French $french = null): void
     {
-        if ($french = $frenchHandler->retrieveById($id)) {
+        if ($french) {
             $form = $this->createForm(FrenchType::class, $french);
-
             $form->submit($request->request->all());
 
             if ($form->isValid()) {
