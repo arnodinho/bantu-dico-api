@@ -52,11 +52,9 @@ class PageHandler extends AbstractHandler implements HandlerInterface
         $this->pageManager->save($entity);
     }
 
-    public function deleteById(int $id)
+    public function delete(StorableEntityInterface $entity)
     {
-        if ($entity = $this->pageManager->findById($id)) {
-            $this->pageManager->delete($entity);
-        }
+        $this->pageManager->delete($entity);
     }
 
     public function update(StorableEntityInterface $entity): void

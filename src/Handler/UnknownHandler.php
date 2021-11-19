@@ -53,11 +53,9 @@ class UnknownHandler extends AbstractHandler implements HandlerInterface
         $this->unknownManager->save($entity);
     }
 
-    public function deleteById(int $id)
+    public function delete(StorableEntityInterface $entity)
     {
-        if ($entity = $this->retrieveById($id)) {
-            $this->unknownManager->delete($entity);
-        }
+        $this->unknownManager->delete($entity);
     }
 
     public function update(StorableEntityInterface $entity): void
