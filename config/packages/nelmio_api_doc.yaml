@@ -1,11 +1,9 @@
 nelmio_api_doc:
-    documentation:
-        host: bantu-dico.com
-        schemes: [http, https]
-        info:
-            title: Bantu-dico Official API
-            description: French - Lingala - Sango Dictionary
-            version: 1.0.0
-    areas: # to filter documented areas
-        path_patterns:
-            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+  documentation:
+      info:
+        title: Bantu-dico Official API dev
+        description: French - Lingala - Sango Dictionary
+        version: 1.0.0
+  areas:
+    path_patterns: # an array of regexps
+      - ^/api(?!/doc$)

@@ -3,8 +3,8 @@ nelmio_api_doc:
         host: bantu-dico.com
         schemes: [http, https]
         info:
-            title: Bantu-dico Official API
-            description: French - Lingala - Sango Dictionary
+            title: Bantu-dico Official API prod
+            description: French - Lingala - Sango Dictionary prod
             version: 1.0.0
     areas: # to filter documented areas
         path_patterns:
